@@ -2,18 +2,43 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Sabrina Snider | Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
   <body>
     <div id="content">
-      <h1>Sabrina's Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <img src="images/tux.jpg" height="600">
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <div id="navbar" class="sticky">
+        <div id="nav-header">
+          <h1 id="nav-name">Sabrina Snider</h1>
+        </div>
+        <div id="nav-links">
+          <button class="nav-item">About Me</button>
+          <button class="nav-item">Work</button>
+          <button class="nav-item">Projects</button>
+        </div>
+      </div>
+
+      <div id="intro">
+        <h1 class="big-header-1">Hello, I'm Sabrina Snider.</h1>
+        <h2 class="sub-header-1">I like writing code.</h2>
+      </div>
+
+      <div id="smaller">
+        <div id="about-me-section" class="section white">
+          <h1>About me</h1>
+        </div>
+
+        <div id="work-section" class="section gray">
+          <h1>About me</h1>
+        </div>
+
+        <div id="project-section" class="section white">
+          <h1>About me</h1>
+        </div>
+    </div>
     </div>
   </body>
 </html>
