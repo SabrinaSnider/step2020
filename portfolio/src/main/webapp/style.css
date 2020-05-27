@@ -24,31 +24,27 @@ a:hover {
   margin: 0px 10px;
 }
 
-.selected {
-  color: #ede7f6;
-}
-
-.sticky {
+.stick-to-top {
   position: fixed;
   top: 0;
   width: 100%;
 }
 
-.big-header-1 {
+.big-header-main {
   color: #ede7f6;
   font-size: 3rem;
   margin: 0px;
   padding: 0px;
 }
 
-.sub-header-1 {
+.sub-header-main {
   color: #b9b0c2;
   font-size: 2rem;
   margin: 0px;
   padding: 0px;
 }
 
-.section {
+.section-content {
   padding: 20px;
   width: 1000px;
   margin: auto;
@@ -92,7 +88,6 @@ a:hover {
 
 #intro {
   height: 100vh;
-  /* background-color: #37474f; */
   background-image: url(./images/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
