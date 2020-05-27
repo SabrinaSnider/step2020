@@ -1,3 +1,7 @@
+html { 
+  scroll-behavior: smooth; 
+} 
+
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +11,16 @@ body {
 button {
   background: none;
 	border: none;
+}
+
+p {
+  color: #37474f;
+  text-align: left;
+  padding: 10px;
+}
+
+section {
+  padding: 50px;
 }
 
 a:link {
@@ -39,7 +53,7 @@ a:hover {
 
 .sub-header-main {
   color: #b9b0c2;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin: 0px;
   padding: 0px;
 }
@@ -56,6 +70,109 @@ a:hover {
 
 .gray {
   background-color: #eeeeee;
+}
+
+.footer {
+  background-color: #37474f;
+}
+
+.bordered-button-white {
+  border: 3px solid #ede7f6;
+  color: #ede7f6;
+  padding: 10px;
+  margin: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.section-header {
+  border-bottom: 3px solid #673ab7;
+  color: #673ab7;
+  padding: 10px;
+  margin: 50px auto;
+  font-size: 2.2rem;
+  font-weight: bold;
+  width: fit-content;
+}
+
+.footer-header {
+  color: #ede7f6;
+  padding: 10px;
+  margin: 10px;
+  font-size: 2rem;
+  font-weight: bold;
+  width: fit-content;
+}
+
+.skills {
+  text-align: right;
+  padding: 10px auto;
+  color: white;
+  background-color: #673ab7;
+  padding: 5px;
+}
+
+.remove-top-spacing {
+  margin-top: 0px;
+  padding-top: 0px;;
+}
+
+.java {width: 90%;}
+.cpp {width: 80%;}
+.html {width: 70%;}
+.css {width: 70%;}
+.javascript {width: 60%;}
+.python {width: 50%;}
+
+.skill-full-bar {
+  background-color: transparent;
+  width: 100%;
+  border: 2px solid #37474f;
+}
+
+.skill-label {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.work-item {
+  border-radius: 20px;
+  background-color: #ede7f6;
+  margin: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.work-title {
+  padding: 20px;
+  width: 25%;
+  margin: 0px;
+  text-align: center;
+  background-color: #673ab7;
+  color: #ede7f6;
+  font-size: 1.5rem;
+}
+
+.work-description {
+  padding: 10px 20px;
+}
+
+.date {
+  margin: 10px 20px;
+  padding: 0px;
+}
+
+#selfie {
+  padding: 20px;
+  border-radius: 7px;
+  width: 300px;
+  height: 300px;
+  border-bottom: 7px solid #673ab7;
+  border-left: 7px solid #673ab7;
 }
 
 #content {
@@ -95,4 +212,21 @@ a:hover {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
+
+#about-me-content {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+#bio-content {
+  width: 500px;
+  margin-right: 10px;
+}
+
+#skills-content {
+  flex-grow: 1;
+  margin-left: 10px;
+  border-radius: 5px;
 }
