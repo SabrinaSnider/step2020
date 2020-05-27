@@ -122,7 +122,7 @@ a:hover {
 .cpp {width: 80%;}
 .html {width: 70%;}
 .css {width: 70%;}
-.javascript {width: 60%;}
+.javascript {width: 50%;}
 .python {width: 50%;}
 
 .skill-full-bar {
@@ -145,16 +145,33 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 180px;
+}
+
+.work-title-container {
+  flex-shrink: 0;
+  flex-grow: 0;
+  padding: 20px;
+  width: 30%;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #673ab7;
 }
 
 .work-title {
-  padding: 20px;
-  width: 25%;
-  margin: 0px;
   text-align: center;
-  background-color: #673ab7;
   color: #ede7f6;
   font-size: 1.5rem;
+  margin: 10px;
+}
+
+.work-company {
+  text-align: center;
+  color: #b9b0c2;
+  font-size: 1.3rem;
+  margin: 10px;
 }
 
 .work-description {
