@@ -64,16 +64,12 @@ a:hover {
   margin: auto;
 }
 
-.white {
+.white-background {
   background-color: white;
 }
 
-.gray {
+.gray-background {
   background-color: #eeeeee;
-}
-
-.footer {
-  background-color: #37474f;
 }
 
 .section-header {
@@ -86,7 +82,18 @@ a:hover {
   width: fit-content;
 }
 
-.skills {
+.remove-top-spacing {
+  margin-top: 0px;
+  padding-top: 0px;;
+}
+
+.skillbar-outline {
+  background-color: transparent;
+  width: 100%;
+  border: 2px solid #37474f;
+}
+
+.skillbar {
   text-align: right;
   padding: 10px auto;
   color: white;
@@ -94,23 +101,12 @@ a:hover {
   padding: 5px;
 }
 
-.remove-top-spacing {
-  margin-top: 0px;
-  padding-top: 0px;;
-}
-
-.java {width: 90%;}
-.cpp {width: 80%;}
-.html {width: 70%;}
-.css {width: 70%;}
-.javascript {width: 50%;}
-.python {width: 50%;}
-
-.skill-full-bar {
-  background-color: transparent;
-  width: 100%;
-  border: 2px solid #37474f;
-}
+.java-bar {width: 90%;}
+.cpp-bar {width: 80%;}
+.html-bar {width: 70%;}
+.css-bar {width: 70%;}
+.javascript-bar {width: 50%;}
+.python-bar {width: 50%;}
 
 .skill-label {
   margin-bottom: 0;
@@ -131,7 +127,7 @@ a:hover {
   height: 180px;
 }
 
-.work-title-container {
+.work-header {
   flex-shrink: 0;
   flex-grow: 0;
   padding: 20px;
@@ -161,7 +157,7 @@ a:hover {
   padding: 10px 20px;
 }
 
-.date {
+.work-date {
   margin: 10px 20px;
   padding: 0px;
 }
@@ -182,6 +178,7 @@ a.white-button:hover {
 }
 
 .footer {
+  background-color: #37474f;
   display: flex;
   flex-direction: row;
   justify-content: center;
