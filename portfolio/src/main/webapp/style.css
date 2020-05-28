@@ -128,8 +128,7 @@ a:hover {
   flex-direction: row;
   justify-content: space-between;
   height: 12vh;
-  min-height: fit-content;
-  max-height: 200px;
+  height: 180px;
 }
 
 .work-title-container {
