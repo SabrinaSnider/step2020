@@ -60,7 +60,7 @@ a:hover {
 
 .section-content {
   padding: 20px;
-  width: 1000px;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -117,6 +117,7 @@ a:hover {
   padding-bottom: 0;
   margin-left: 0;
   padding-left: 0;
+  font-size: 1.2rem;
 }
 
 .work-item {
@@ -126,7 +127,9 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 180px;
+  height: 12vh;
+  min-height: fit-content;
+  max-height: 200px;
 }
 
 .work-title-container {
@@ -231,7 +234,7 @@ a.white-button:hover {
 
 #intro {
   height: 100vh;
-  background-image: url(./images/background.jpg);
+  background-image: url(./static-files/images/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
