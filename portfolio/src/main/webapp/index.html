@@ -2,17 +2,125 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Sabrina Snider | Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
   <body>
     <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <div id="navbar" class="stick-to-top">
+        <div id="nav-header">
+          <a href="#intro"><h1 id="nav-name">Sabrina Snider</h1></a>
+        </div>
+        <div id="nav-links">
+          <a href="#about-me-section" class="nav-item">About Me</a>
+          <a href="#work-section"  class="nav-item">Work</a>
+          <a id="resume-button" class="white-button" href="./static-files/sabrina_snider_resume.pdf" download>Resume</a>
+        </div>
+      </div>
+      
+      <section id="intro">
+        <h1 class="big-header-main">Hello, I'm <span style="color: #9366e3">Sabrina Snider</span>.</h1>
+        <h2 class="sub-header-main">I like writing code.</h2>
+        <a href="#work-section" id="work-button" class="white-button">My Work</a>
+      </section>
+
+      <section id="about-me-section" class="white-background">
+        <h1 class="section-header">About me</h1>
+        <div id="about-me-content" class="section-content">
+          <div id="bio-content">
+            <div id="selfie-container">
+              <img id="selfie" src="./static-files/images/selfie-cropped.jpg">
+            </div>
+            <p>
+              Hello World! I'm Sabrina and I'm a software developer from Gainesville, Florida. I'm currently a raising junior at the University of Florida, pursuing a degree in Computer Science and expanding my knowledge through personal projects.
+            </p>
+          </div>
+
+          <div id="skills-content">
+            <p class="skill-label remove-top-spacing">Java</p>
+            <div class="skillbar-outline"><div class="skillbar java-bar">90%</div></div>
+
+            <p class="skill-label">C++</p>
+            <div class="skillbar-outline"><div class="skillbar cpp-bar">80%</div></div>
+
+            <p class="skill-label">HTML</p>
+            <div class="skillbar-outline"><div class="skillbar html-bar">70%</div></div>
+
+            <p class="skill-label">CSS</p>
+            <div class="skillbar-outline"><div class="skillbar css-bar">70%</div></div>
+
+            <p class="skill-label">Javascript</p>
+            <div class="skillbar-outline"><div class="skillbar javascript-bar">50%</div></div>
+
+            <p class="skill-label">Python</p>
+            <div class="skillbar-outline"><div class="skillbar python-bar">50%</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="work-section" class="gray-background">
+        <div class="section-content">
+          <h1 class="section-header">My Work</h1>
+          <div class="work-item">
+            <div class="work-header">
+              <h3 class="work-title">Programming 1 TA</h3>
+              <h3 class="work-company">University of Florida</h3>
+            </div>
+
+            <div class="work-content">
+              <p class="work-date">August 2019 - May 2020</p>
+              <p class="work-description">
+                Mentored a class of 600 students on fundamental programming concepts using <b>Java</b>. Content spanned object-oriented programming, inheritence, and polymorphism. 
+              </p>
+            </div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-header">
+              <h3 class="work-title">Data Analytics Intern</h3>
+              <h3 class="work-company">InfoTech</h3>
+            </div>
+            
+            <div class="work-content">
+              <p class="work-date">May 2019 - August 2019</p>
+              <p class="work-description">
+                Developed a data analytics dashboard for company statistics using the <b>Dash</b> framework and <b>Plotly</b>. Used <B>HTML</B> and <b>CSS</b> to develop a responseive front-end, and used <b>python</b> and
+                <b>SQL</b> for the backend.
+              </p>
+            </div>
+          </div>
+
+          <div class="work-item">
+            <div class="work-header">
+              <h3 class="work-title">R&D Intern</h3>
+              <h3 class="work-company">Medtronic</h3>
+            </div>
+
+            <div class="work-content">
+              <p class="work-date">May 2018 - August 2018</p>
+              <p class="work-description">
+                Performed electrical and low-level software tasks to help development of a nerve-monitoring device for surgery, including testing wireless protocols, assembling
+                breadboard circuits, and validating PCB impedances.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="footer">
+        <a href="https://www.linkedin.com/in/sabrina-snider" target="_blank">
+          <img id="linkedin" class="footer-icon" src="./static-files/images/icons/linkedin.png">
+        </a>
+        <a href="https://github.com/SabrinaSnider" target="_blank">
+          <img id="github" class="footer-icon" src="./static-files/images/icons/github.png">
+        </a>
+        <a href="mailto:sabrina.snider10@gmail.com" target="_blank">
+          <img id="gmail" class="footer-icon" src="./static-files/images/icons/gmail.png">
+        </a>
+      </section>
     </div>
   </body>
 </html>
