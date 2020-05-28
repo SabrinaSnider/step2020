@@ -35,7 +35,7 @@ a:hover {
   color: #b39ddb;
   font-size: 1.25rem;
   font-family: 'Inconsolata', monospace;
-  margin: 0px 10px;
+  margin: 0px 20px;
 }
 
 .stick-to-top {
@@ -76,31 +76,12 @@ a:hover {
   background-color: #37474f;
 }
 
-.bordered-button-white {
-  border: 3px solid #ede7f6;
-  color: #ede7f6;
-  padding: 10px;
-  margin: 10px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 5px;
-}
-
 .section-header {
   border-bottom: 3px solid #673ab7;
   color: #673ab7;
   padding: 10px;
   margin: 50px auto;
   font-size: 2.2rem;
-  font-weight: bold;
-  width: fit-content;
-}
-
-.footer-header {
-  color: #ede7f6;
-  padding: 10px;
-  margin: 10px;
-  font-size: 2rem;
   font-weight: bold;
   width: fit-content;
 }
@@ -183,6 +164,34 @@ a:hover {
   padding: 0px;
 }
 
+.white-button {
+  color: #ede7f6;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #ede7f6;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+a.white-button:hover {
+  background-color: #ede7f6;
+  color: #37474f;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+}
+
+.footer-icon {
+  height: 40px;
+  width: 40px;
+  margin: 40px;
+}
+
 #selfie {
   padding: 20px;
   border-radius: 7px;
@@ -246,4 +255,14 @@ a:hover {
   flex-grow: 1;
   margin-left: 10px;
   border-radius: 5px;
+}
+
+#work-button {
+  border-width: 3px;;
+  font-size: 1.5rem;
+}
+
+#resume-button {
+  border-width: 1.5px;;
+  font-size: 1.1rem;
 }
