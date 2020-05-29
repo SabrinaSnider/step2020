@@ -26,3 +26,39 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+/* Fetches json data from /data and displays them as an unordered list */
+function toggleJsonList(containerID) {
+  const container = document.getElementById(containerID);
+
+  if (container.innerHTML !== "") {
+    console.log("toggle list off");
+    container.innerHTML = "";
+  } else {
+    console.log("toggle list on");
+    fetch('/data').then(response => response.json()).then(data => {
+      console.log("data is", data);
+      container.appendChild(createUnorderedList(data))
+    })
+  }
+}
+
+/* Creates an <ul> element. */
+function createUnorderedList(data) {
+  console.log("data2 is", data)
+
+  const ulElement = document.createElement('ul');
+  data.forEach(element => {
+    ulElement.appendChild(
+      createListElement(element)
+    );
+  });
+  return ulElement;
+}
+
+/* Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}

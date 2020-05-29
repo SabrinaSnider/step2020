@@ -31,6 +31,8 @@ public class DataServlet extends HttpServlet {
   ArrayList<String> json_data = new ArrayList<String>();
 
   private void initData() {
+    if (!json_data.isEmpty()) return;
+
     json_data.add("Wild World");
     json_data.add("City Folk");
     json_data.add("New Leaf");
