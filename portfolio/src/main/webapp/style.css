@@ -177,6 +177,21 @@ a.white-button:hover {
   color: #37474f;
 }
 
+.purple-button {
+  color: #673ab7;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #673ab7;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+a.purple-button:hover {
+  background-color: #673ab7;
+  color: #ede7f6;
+}
+
 .footer {
   background-color: #37474f;
   display: flex;
@@ -264,4 +279,9 @@ a.white-button:hover {
 #resume-button {
   border-width: 1.5px;;
   font-size: 1.1rem;
+}
+
+#comment-section {
+  display: flex;
+  flex-direction: column;
 }
