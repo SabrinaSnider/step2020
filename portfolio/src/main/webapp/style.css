@@ -164,9 +164,8 @@ a:hover {
 
 .white-button {
   color: #ede7f6;
+  border: 5px solid #ede7f6;
   border-radius: 5px;
-  border-style: solid;
-  border-color: #ede7f6;
   padding: 10px;
   margin: 10px;
   font-weight: bold;
@@ -179,7 +178,8 @@ a.white-button:hover {
 
 .purple-button {
   color: #673ab7;
-  border: 5px solid #673ab7;
+  border: 2px solid #673ab7;
+  border-radius: 5px;
   padding: 10px;
   margin: 10px;
   font-weight: bold;
