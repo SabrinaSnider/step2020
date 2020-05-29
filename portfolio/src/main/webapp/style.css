@@ -179,9 +179,7 @@ a.white-button:hover {
 
 .purple-button {
   color: #673ab7;
-  border-radius: 5px;
-  border-style: solid;
-  border-color: #673ab7;
+  border: 5px solid #673ab7;
   padding: 10px;
   margin: 10px;
   font-weight: bold;
@@ -284,4 +282,8 @@ a.purple-button:hover {
 #comment-section {
   display: flex;
   flex-direction: column;
+}
+
+#greeting-container {
+  margin: 12px;
 }
