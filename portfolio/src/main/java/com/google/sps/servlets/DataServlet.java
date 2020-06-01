@@ -13,7 +13,10 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+
 import com.google.gson.Gson;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,10 +53,16 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String name = request.getParameter("name");
     String message = request.getParameter("message");
+    long timestamp = System.currentTimeMillis();
 
-    System.out.println("name: " + name + ", message: " + message);
+    Entity newComment = new Entity("Comment");
 
-    comments.add(new Comment(name, message));
+    newComment.setProperty("name", name);
+    newComment.setProperty("timestamp", timestamp);
+    newComment.setProperty("message", message);
+
+    DatastoreServiceFactory.getDatastoreService().put(newComment);
+
     response.sendRedirect("/");
   }
 }
