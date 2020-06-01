@@ -14,38 +14,61 @@
 
 package com.google.sps.servlets;
 
-import com.google.gson.Gson;
+import structures.Comment;
+
+import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import structures.Comment;
-
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
-  ArrayList<Comment> comments = new ArrayList<Comment>();
-
   /* Converts the comments arraylist to a json String */
-  private String convertToJson(ArrayList<Comment> data) {
+  private String convertToJson(List<Comment> data) {
     return (new Gson()).toJson(data);
+  }
+
+  /* Gets the query results from the datastore for Comments */
+  private PreparedQuery queryComments(String sortBy, boolean ascending) {
+    Query.SortDirection sortDirection = ascending ? SortDirection.ASCENDING : SortDirection.DESCENDING;
+    Query queryForComments = new Query("Comment").addSort(sortBy, sortDirection);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    return datastore.prepare(queryForComments);
   }
 
   /* Returns a json String of the comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJson(comments);
+    PreparedQuery queriedComments = queryComments("timestamp", false);
 
-    response.setContentType("application/json");
-    response.getWriter().println(json);
+    List<Comment> comments = new ArrayList<>();
+    for (Entity commentEntity : queriedComments.asIterable()) {
+      long id = commentEntity.getKey().getId();
+      String name = (String) commentEntity.getProperty("name");
+      long timestamp = (long) commentEntity.getProperty("timestamp");
+      String message = (String) commentEntity.getProperty("message");
+
+      Comment comment = new Comment(id, name, timestamp, message);
+      comments.add(comment);
+    }
+
+    response.setContentType("application/json;");
+    response.getWriter().println(convertToJson(comments));
   }
 
   /* Adds the request comment to comments arraylist */
