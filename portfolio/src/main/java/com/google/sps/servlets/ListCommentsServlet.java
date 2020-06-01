@@ -33,9 +33,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/comment")
-public class DataServlet extends HttpServlet {
+/* Servlet that returns some example content. */
+@WebServlet("/list-comments")
+public class ListCommentsServlet extends HttpServlet {
 
   /* Converts the comments arraylist to a json String */
   private String convertToJson(List<Comment> data) {
@@ -69,23 +69,5 @@ public class DataServlet extends HttpServlet {
 
     response.setContentType("application/json;");
     response.getWriter().println(convertToJson(comments));
-  }
-
-  /* Adds the request comment to comments arraylist */
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String name = request.getParameter("name");
-    String message = request.getParameter("message");
-    long timestamp = System.currentTimeMillis();
-
-    Entity newComment = new Entity("Comment");
-
-    newComment.setProperty("name", name);
-    newComment.setProperty("timestamp", timestamp);
-    newComment.setProperty("message", message);
-
-    DatastoreServiceFactory.getDatastoreService().put(newComment);
-
-    response.sendRedirect("/");
   }
 }

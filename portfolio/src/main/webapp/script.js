@@ -16,7 +16,7 @@
 function getComments() {
   const container = document.getElementById("comment-list");
 
-  fetch('/comment').then(response => response.json()).then(data => {
+  fetch('/list-comments').then(response => response.json()).then(data => {
     console.log("get data is", data);
     data.forEach(comment => {
       container.appendChild(
