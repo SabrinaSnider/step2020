@@ -12,53 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-
 /* Fetches json data from /data and displays them as an unordered list */
-function toggleJsonList(containerID) {
-  const container = document.getElementById(containerID);
+function getComments() {
+  console.log("get comments call")
+  const container = document.getElementById("comment-list");
 
-  if (container.innerHTML !== "") {
-    console.log("toggle list off");
-    container.innerHTML = "";
-  } else {
-    console.log("toggle list on");
-    fetch('/data').then(response => response.json()).then(data => {
-      console.log("data is", data);
-      container.appendChild(createUnorderedList(data))
-    })
-  }
+  fetch('/comment').then(response => response.json()).then(data => {
+    console.log("get data is", data);
+    data.forEach(comment => {
+      container.appendChild(
+        createListElement(comment)
+      );
+    });
+  })
 }
 
 /* Creates an <ul> element. */
-function createUnorderedList(data) {
-  console.log("data2 is", data)
+// function createUnorderedList(data) {
+//   console.log("unordered list data is", data)
 
-  const ulElement = document.createElement('ul');
-  data.forEach(element => {
-    ulElement.appendChild(
-      createListElement(element)
-    );
-  });
-  return ulElement;
-}
+//   const ulElement = document.createElement('ul');
+//   data.forEach(comment => {
+//     ulElement.appendChild(
+//       createListElement(comment)
+//     );
+//   });
+//   return ulElement;
+// }
 
 /* Creates an <li> element containing text. */
-function createListElement(text) {
+function createListElement(comment) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+
+  liElement.innerText = comment.name + " " + comment.message;
+  liElement.classList.add("comment")
   return liElement;
 }

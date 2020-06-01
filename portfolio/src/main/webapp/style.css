@@ -19,6 +19,21 @@ p {
   padding: 10px;
 }
 
+form {
+  width: 100%;
+}
+
+input {
+  border: 1.5px solid #673ab7;
+  padding: 5px 10px;
+  font-size: 1rem;
+  margin: 10px 0px;
+  border-radius: 2px;;
+  background-color: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 section {
   padding: 50px;
 }
@@ -172,7 +187,7 @@ a:hover {
   display: inline-block;
 }
 
-a.white-button:hover {
+.white-button:hover {
   background-color: #ede7f6;
   color: #37474f;
 }
@@ -187,9 +202,16 @@ a.white-button:hover {
   display: inline-block;
 }
 
-a.purple-button:hover {
+.purple-button:hover {
   background-color: #673ab7;
   color: #ede7f6;
+}
+
+.comment {
+  list-style: none;
+  color: #37474f;
+  background-color: #eeeeee;
+  border: 1.5px solid #673ab7;
 }
 
 .footer {
@@ -281,11 +303,34 @@ a.purple-button:hover {
   font-size: 1.1rem;
 }
 
-#comment-section {
+#toggle-message-section {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 #greeting-container {
   margin: 12px;
+}
+
+#comment-content {
+  max-width: 700px;
+}
+
+#comment-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  flex-grow: 1;
+}
+
+#comment-submit-btn {
+  margin: 10px 0px;;
+}
+
+#comment-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 0px;
 }
