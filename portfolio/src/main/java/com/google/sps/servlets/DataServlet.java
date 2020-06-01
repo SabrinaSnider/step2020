@@ -33,11 +33,10 @@ public class DataServlet extends HttpServlet {
 
   /* Converts the comments arraylist to a json String */
   private String convertToJson(ArrayList<Comment> data) {
-    Gson gson = new Gson();
-    return gson.toJson(data);
+    return (new Gson()).toJson(data);
   }
 
-  /* Returns a json string of the comments */
+  /* Returns a json String of the comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String json = convertToJson(comments);
@@ -46,7 +45,7 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  /* Adds the request comment to comments */
+  /* Adds the request comment to comments arraylist */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String name = request.getParameter("name");
@@ -54,9 +53,7 @@ public class DataServlet extends HttpServlet {
 
     System.out.println("name: " + name + ", message: " + message);
 
-    Comment newComment = new Comment(name, message);
-
-    comments.add(newComment);
+    comments.add(new Comment(name, message));
     response.sendRedirect("/");
   }
 }

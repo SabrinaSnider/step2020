@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* Fetches json data from /data and displays them as an unordered list */
+/* Fetches comment json data data from /comment and displays them */
 function getComments() {
-  console.log("get comments call")
   const container = document.getElementById("comment-list");
 
   fetch('/comment').then(response => response.json()).then(data => {
@@ -27,43 +26,20 @@ function getComments() {
   })
 }
 
-/* Creates an <ul> element. */
-// function createUnorderedList(data) {
-//   console.log("unordered list data is", data)
-
-//   const ulElement = document.createElement('ul');
-//   data.forEach(comment => {
-//     ulElement.appendChild(
-//       createListElement(comment)
-//     );
-//   });
-//   return ulElement;
-// }
-
-/* Creates an <li> element containing text. */
-// function createListElement(comment) {
-//   const commentLi = document.createElement('li');
-
-//   commentLi.innerText = comment.name + " " + comment.message;
-//   commentLi.classList.add("comment")
-//   return commentLi;
-// }
-
 /* Creates an <li> element containing text. */
 function addComment(comment) {
-  console.log("adding comment")
-  const commentLi = document.createElement("li");
+  const commentItem = document.createElement("li");
   const commentName = document.createElement("p");
   const commentMessage = document.createElement("p");
 
-  commentLi.classList.add("comment");
+  commentItem.classList.add("comment");
   commentName.classList.add("comment-name");
   commentMessage.classList.add("comment-message");
 
   commentName.innerText = comment.name;
   commentMessage.innerText = comment.message
 
-  commentLi.appendChild(commentName);
-  commentLi.appendChild(commentMessage);
-  return commentLi;
+  commentItem.appendChild(commentName);
+  commentItem.appendChild(commentMessage);
+  return commentItem;
 }

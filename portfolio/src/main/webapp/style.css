@@ -28,7 +28,7 @@ input {
   padding: 5px 10px;
   font-size: 1rem;
   margin: 10px 0px;
-  border-radius: 2px;;
+  border-radius: 2px;
   background-color: white;
   width: 100%;
   box-sizing: border-box;
@@ -99,7 +99,7 @@ a:hover {
 
 .remove-top-spacing {
   margin-top: 0px;
-  padding-top: 0px;;
+  padding-top: 0px;
 }
 
 .skillbar-outline {
@@ -259,7 +259,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 5px solid #673ab7;;
+  border-bottom: 5px solid #673ab7;
   background-color: #37474f;
   align-items: center;
   padding: 20px;
@@ -307,12 +307,12 @@ a:hover {
 }
 
 #work-button {
-  border-width: 3px;;
+  border-width: 3px;
   font-size: 1.5rem;
 }
 
 #resume-button {
-  border-width: 1.5px;;
+  border-width: 1.5px;
   font-size: 1.1rem;
 }
 
@@ -338,7 +338,7 @@ a:hover {
 }
 
 #comment-submit-btn {
-  margin: 10px 0px;;
+  margin: 10px 0px;
 }
 
 #comment-list {
