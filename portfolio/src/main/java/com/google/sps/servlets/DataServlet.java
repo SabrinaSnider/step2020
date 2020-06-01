@@ -13,20 +13,47 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import structures.Comment;
+
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+@WebServlet("/comment")
 public class DataServlet extends HttpServlet {
 
+  ArrayList<Comment> comments = new ArrayList<Comment>();
+
+  /* Converts the comments arraylist to a json String */
+  private String convertToJson(ArrayList<Comment> data) {
+    return (new Gson()).toJson(data);
+  }
+
+  /* Returns a json String of the comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Sabrina!</h1>");
+    String json = convertToJson(comments);
+
+    response.setContentType("application/json");
+    response.getWriter().println(json);
+  }
+
+  /* Adds the request comment to comments arraylist */
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String name = request.getParameter("name");
+    String message = request.getParameter("message");
+
+    System.out.println("name: " + name + ", message: " + message);
+
+    comments.add(new Comment(name, message));
+    response.sendRedirect("/");
   }
 }
