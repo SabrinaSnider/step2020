@@ -21,7 +21,7 @@ function getComments() {
     console.log("get data is", data);
     data.forEach(comment => {
       container.appendChild(
-        createListElement(comment)
+        addComment(comment)
       );
     });
   })
@@ -41,10 +41,29 @@ function getComments() {
 // }
 
 /* Creates an <li> element containing text. */
-function createListElement(comment) {
-  const liElement = document.createElement('li');
+// function createListElement(comment) {
+//   const commentLi = document.createElement('li');
 
-  liElement.innerText = comment.name + " " + comment.message;
-  liElement.classList.add("comment")
-  return liElement;
+//   commentLi.innerText = comment.name + " " + comment.message;
+//   commentLi.classList.add("comment")
+//   return commentLi;
+// }
+
+/* Creates an <li> element containing text. */
+function addComment(comment) {
+  console.log("adding comment")
+  const commentLi = document.createElement("li");
+  const commentName = document.createElement("p");
+  const commentMessage = document.createElement("p");
+
+  commentLi.classList.add("comment");
+  commentName.classList.add("comment-name");
+  commentMessage.classList.add("comment-message");
+
+  commentName.innerText = comment.name;
+  commentMessage.innerText = comment.message
+
+  commentLi.appendChild(commentName);
+  commentLi.appendChild(commentMessage);
+  return commentLi;
 }

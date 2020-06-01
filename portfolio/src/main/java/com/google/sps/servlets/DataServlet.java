@@ -57,5 +57,6 @@ public class DataServlet extends HttpServlet {
     Comment newComment = new Comment(name, message);
 
     comments.add(newComment);
+    response.sendRedirect("/");
   }
 }
