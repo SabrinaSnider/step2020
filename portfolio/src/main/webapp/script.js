@@ -25,6 +25,12 @@ function toggleSort() {
   getComments();
 }
 
+/* Toggle on the delete all button if comments exist */
+function toggleDeleteAll(show) {
+  const deleteAllButton = document.getElementById("delete-all-button");
+  deleteAllButton.style.display = show ? "block" : "none";
+}
+
 /* Fetches comment json data data from /comment and displays them */
 function getComments() {
   const container = document.getElementById("comment-list");
@@ -33,7 +39,6 @@ function getComments() {
   const maxSelector = document.getElementById('comment-max-select');
   const sortDirectionIcon = document.getElementById("sort-icon");
   
-
   const sort = sortSelector.options[sortSelector.selectedIndex].value;
   const max = maxSelector.options[maxSelector.selectedIndex].value;
   const ascending = sortDirectionIcon.classList[0] === "sort-up" ? "true" : "false";
@@ -47,23 +52,30 @@ function getComments() {
         addComment(comment)
       );
     });
+    Object.keys(data).length > 0 ? toggleDeleteAll(true) : toggleDeleteAll(false);
   })
 }
 
 /* Creates an <li> element containing text. */
 function addComment(comment) {
   const commentItem = document.createElement("li");
+  const commentHeader = document.createElement("div");
   const commentName = document.createElement("p");
   const commentMessage = document.createElement("p");
+  const commentDelete = document.createElement("img");
 
   commentItem.classList.add("comment");
+  commentHeader.classList.add("comment-header");
   commentName.classList.add("comment-name");
   commentMessage.classList.add("comment-message");
+  commentDelete.classList.add("comment-delete");
 
   commentName.innerText = comment.name;
   commentMessage.innerText = comment.message
 
-  commentItem.appendChild(commentName);
+  commentItem.appendChild(commentHeader);
+  commentHeader.appendChild(commentName);
+  commentHeader.appendChild(commentDelete);
   commentItem.appendChild(commentMessage);
   return commentItem;
 }
