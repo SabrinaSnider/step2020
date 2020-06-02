@@ -14,9 +14,10 @@
 
 /* Fetches comment json data data from /comment and displays them */
 function getComments() {
+  console.log("getComments call")
   const container = document.getElementById("comment-list");
 
-  fetch('/list-comments').then(response => response.json()).then(data => {
+  fetch('/list-comments?x=2&y=3').then(response => response.json()).then(data => {
     console.log("get data is", data);
     data.forEach(comment => {
       container.appendChild(

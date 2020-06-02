@@ -54,6 +54,8 @@ public class ListCommentsServlet extends HttpServlet {
   /* Returns a json String of the comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    System.out.println("query param x" + request.getParameter("x"));
+
     PreparedQuery queriedComments = queryComments("timestamp", false);
 
     List<Comment> comments = new ArrayList<>();

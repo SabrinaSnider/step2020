@@ -113,6 +113,26 @@
       <section id="comment-section" class="white-background">
         <h1 class="section-header">Comments</h1>
         <div id="comment-content" class="section-content">
+          <div id="comment-options">
+            <div>
+              <label for="cars">Sort by</label>
+              <select name="cars" id="cars">
+                <option value="Name">Name</option>
+                <option value="Time">Time</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="cars">View</label>
+              <select name="cars" id="cars">
+                <option value=5>5</option>
+                <option value=10>10</option>
+                <option value=25>25</option>
+                <option value=50>50</option>
+              </select>
+            </div>
+          </div>
+          
           <form id="comment-form" action="/add-comment" method="POST">
             <input type="text" name="name" placeholder="Name">
             <textarea type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
