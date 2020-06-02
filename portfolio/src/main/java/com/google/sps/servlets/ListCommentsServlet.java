@@ -57,11 +57,13 @@ public class ListCommentsServlet extends HttpServlet {
     String sortBy = request.getParameter("sort");
     boolean ascending = Boolean.parseBoolean(request.getParameter("ascending"));
     int maxComments = Integer.valueOf(request.getParameter("max"));
-    
+
     PreparedQuery queriedComments = queryComments(sortBy, ascending);
 
     List<Comment> comments = new ArrayList<>();
     for (Entity commentEntity : queriedComments.asIterable()) {
+      if (comments.size() >= maxComments) break;
+
       long id = commentEntity.getKey().getId();
       String name = (String) commentEntity.getProperty("name");
       long timestamp = (long) commentEntity.getProperty("timestamp");
