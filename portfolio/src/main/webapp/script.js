@@ -32,16 +32,15 @@ function getComments() {
   const sortSelector = document.getElementById('comment-sort-select');
   const maxSelector = document.getElementById('comment-max-select');
   const sortDirectionIcon = document.getElementById("sort-icon");
-  
 
   const sort = sortSelector.options[sortSelector.selectedIndex].value;
   const max = maxSelector.options[maxSelector.selectedIndex].value;
-  const ascending = sortDirectionIcon.classList[0] === "sort-up" ? "true" : "false";
+  const ascending = sortDirectionIcon.classList.contains("sort-up") ? "true" : "false";
 
-  const query = "?sort=".concat(sort).concat("&max=").concat(max).concat("&ascending=").concat(ascending);
+  const query = `?sort=${sort}&max=${max}&ascending=${ascending}`;
 
   container.innerHTML = "";
-  fetch('/list-comments'.concat(query)).then(response => response.json()).then(data => {
+  fetch('/list-comments' + query).then(response => response.json()).then(data => {
     data.forEach(comment => {
       container.appendChild(
         addComment(comment)
