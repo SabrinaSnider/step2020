@@ -12,13 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* Toggles the sort between ascending and descending, then updates comments */
+function toggleSort() {
+  const sortDirectionIcon = document.getElementById("sort-icon");
+  if (sortDirectionIcon.classList[0] === "sort-down") {
+    sortDirectionIcon.classList.remove('sort-down');
+    sortDirectionIcon.classList.add('sort-up');
+  } else {
+    sortDirectionIcon.classList.remove('sort-up');
+    sortDirectionIcon.classList.add('sort-down');
+  }
+  getComments();
+}
+
 /* Fetches comment json data data from /comment and displays them */
 function getComments() {
-  console.log("getComments call")
   const container = document.getElementById("comment-list");
 
-  fetch('/list-comments?x=2&y=3').then(response => response.json()).then(data => {
-    console.log("get data is", data);
+  const sortSelector = document.getElementById('comment-sort-select');
+  const maxSelector = document.getElementById('comment-max-select');
+  const sortDirectionIcon = document.getElementById("sort-icon");
+  
+
+  const sort = sortSelector.options[sortSelector.selectedIndex].value;
+  const max = maxSelector.options[maxSelector.selectedIndex].value;
+  const ascending = sortDirectionIcon.classList[0] === "sort-up" ? "true" : "false";
+
+  const query = "?sort=".concat(sort).concat("&max=").concat(max).concat("&ascending=").concat(ascending);
+
+  container.innerHTML = "";
+  fetch('/list-comments'.concat(query)).then(response => response.json()).then(data => {
     data.forEach(comment => {
       container.appendChild(
         addComment(comment)

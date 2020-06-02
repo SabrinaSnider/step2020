@@ -54,9 +54,11 @@ public class ListCommentsServlet extends HttpServlet {
   /* Returns a json String of the comments */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    System.out.println("query param x" + request.getParameter("x"));
-
-    PreparedQuery queriedComments = queryComments("timestamp", false);
+    String sortBy = request.getParameter("sort");
+    boolean ascending = Boolean.parseBoolean(request.getParameter("ascending"));
+    int maxComments = Integer.valueOf(request.getParameter("max"));
+    
+    PreparedQuery queriedComments = queryComments(sortBy, ascending);
 
     List<Comment> comments = new ArrayList<>();
     for (Entity commentEntity : queriedComments.asIterable()) {

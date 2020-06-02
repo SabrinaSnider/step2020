@@ -115,16 +115,17 @@
         <div id="comment-content" class="section-content">
           <div id="comment-options">
             <div>
-              <label for="cars">Sort by</label>
-              <select name="cars" id="cars">
-                <option value="Name">Name</option>
-                <option value="Time">Time</option>
+              <label for="comment-sort">Sort by</label>
+              <select id="comment-sort-select" name="comment-sort" selected="timestamp" onchange="getComments();">
+                <option value="timestamp">Time</option>
+                <option value="name">Name</option>
               </select>
+              <img id="sort-icon" class="sort-down" onclick="toggleSort();">
             </div>
 
             <div>
-              <label for="cars">View</label>
-              <select name="cars" id="cars">
+              <label for="comment-max">View</label>
+              <select id="comment-max-select" name="comment-max" selected=5  onchange="getComments();">
                 <option value=5>5</option>
                 <option value=10>10</option>
                 <option value=25>25</option>
@@ -132,7 +133,7 @@
               </select>
             </div>
           </div>
-          
+
           <form id="comment-form" action="/add-comment" method="POST">
             <input type="text" name="name" placeholder="Name">
             <textarea type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
