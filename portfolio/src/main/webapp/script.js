@@ -25,8 +25,16 @@ function toggleSort() {
   getComments();
 }
 
+/* Deletes all of the comments from the page and from datastore */
+function deleteAllComments() {
+  fetch('/delete-all-comments', { method: "post" }).then(() => {
+    window.location.reload();
+    window.location = "/#comment-form";
+  })
+}
+
 /* Toggle on the delete all button if comments exist */
-function toggleDeleteAll(show) {
+function toggleDeleteAllButton(show) {
   const deleteAllButton = document.getElementById("delete-all-button");
   deleteAllButton.style.display = show ? "block" : "none";
 }
@@ -52,7 +60,7 @@ function getComments() {
         addComment(comment)
       );
     });
-    Object.keys(data).length > 0 ? toggleDeleteAll(true) : toggleDeleteAll(false);
+    Object.keys(data).length > 0 ? toggleDeleteAllButton(true) : toggleDeleteAllButton(false);
   })
 }
 
@@ -77,5 +85,6 @@ function addComment(comment) {
   commentHeader.appendChild(commentName);
   commentHeader.appendChild(commentDelete);
   commentItem.appendChild(commentMessage);
+  
   return commentItem;
 }
