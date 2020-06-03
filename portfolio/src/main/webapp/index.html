@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="getComments();">
+  <body onload="getComments();" onscroll="navbarColorScroll()">
     <div id="content">
       <div id="navbar" class="stick-to-top">
         <div id="nav-header">
@@ -22,9 +22,10 @@
       </div>
       
       <section id="intro">
-        <h1 class="big-header-main">Hello, I'm <span style="color: #9366e3">Sabrina Snider</span>.</h1>
-        <h2 class="sub-header-main">I like writing code.</h2>
-        <a href="#work-section" id="work-button" class="white-button">My Work</a>
+        <!-- <h1 class="big-header-main">Hello, I'm <span style="color: #9366e3">Sabrina Snider</span>.</h1>
+        <h2 class="sub-header-main">I like writing code.</h2> -->
+        <div class="svg circle circle-small"><img id="circle-image-small" src="static-files/images/circle.svg"></div>
+        <div class="svg circle circle-large"><img id="circle-image-large" src="static-files/images/circle2.svg"></div>
       </section>
 
       <div id="overlay">

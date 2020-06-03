@@ -322,11 +322,15 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #263238;
+  /* background-color: #263238; */
+  background-color: transparent;
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
-  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 #nav-name {
@@ -342,12 +346,15 @@ a:hover {
 }
 
 #intro {
-  height: calc(100vh - 80px);
+  height: 100vh;
   background-color: #263238;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;;
 }
 
 #about-me-content {
@@ -433,4 +440,28 @@ a:hover {
   float: right;
   margin: 0px;
   display: none;
+}
+
+.circle {
+  position: absolute;
+}
+
+.circle-small {
+  top: -7rem;
+  left: -7rem;
+}
+
+#circle-image-small {
+  height: 25rem;
+  width: 25rem;
+}
+
+.circle-large {
+  bottom: -10rem;
+  right: -10rem;
+}
+
+#circle-image-large {
+  height: 45rem;
+  width: 45rem;
 }
