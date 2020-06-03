@@ -87,14 +87,14 @@ a:hover {
 
 .big-header-main {
   color: #ede7f6;
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin: 0px;
   padding: 0px;
 }
 
 .sub-header-main {
   color: #b9b0c2;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin: 0px;
   padding: 0px;
 }
@@ -480,6 +480,7 @@ a:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  max-width: 1000px;
 }
 
 #intro-photo-container {
@@ -498,4 +499,5 @@ a:hover {
 #intro-text {
   border-bottom: 5px solid #673ab7;
   padding: 0px 15px;
+  text-align: center;
 }
