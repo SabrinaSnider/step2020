@@ -25,11 +25,17 @@ function toggleSort() {
   getComments();
 }
 
+/* Deletes a single comment from the page and from datastore */
+function deleteComment(id) {
+  fetch('/delete-comment?id='.concat(id), { method: "post" }).then(() => {
+    window.location.reload();
+  })
+}
+
 /* Deletes all of the comments from the page and from datastore */
 function deleteAllComments() {
   fetch('/delete-all-comments', { method: "post" }).then(() => {
     window.location.reload();
-    window.location = "/#comment-form";
   })
 }
 
@@ -79,7 +85,8 @@ function addComment(comment) {
   commentDelete.classList.add("comment-delete");
 
   commentName.innerText = comment.name;
-  commentMessage.innerText = comment.message
+  commentMessage.innerText = comment.message;
+  commentDelete.onclick = function() { deleteComment(comment.id); }; 
 
   commentItem.appendChild(commentHeader);
   commentHeader.appendChild(commentName);

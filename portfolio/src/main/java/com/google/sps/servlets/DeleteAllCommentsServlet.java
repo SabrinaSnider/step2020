@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/* Servlet that adds a comment to the dataserve. */
+/* Servlet that deletes all comments from the dataserve. */
 @WebServlet("/delete-all-comments")
 public class DeleteAllCommentsServlet extends HttpServlet {
 
-  /* Remove all comments from the datastore */
+  /* Removes all comments from the datastore */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -26,7 +26,5 @@ public class DeleteAllCommentsServlet extends HttpServlet {
     for (Entity comment : allComments.asIterable()) {
       datastore.delete(comment.getKey());
     }
-
-    // response.sendRedirect("/#comment-form");
   }
 }
