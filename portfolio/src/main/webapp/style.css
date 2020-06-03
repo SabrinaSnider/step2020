@@ -466,21 +466,13 @@ a:hover {
   width: 45rem;
 }
 
-/* #programming-image-container {
-  z-index: 50;
-}
-
-#programming-image {
-  height: 30rem;
-  width: 30rem;
-} */
-
 #intro-content {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   max-width: 1000px;
+  z-index: 50;
 }
 
 #intro-photo-container {
@@ -488,7 +480,6 @@ a:hover {
   padding-left: 8px;
   border-bottom: 5px solid #673ab7;
   border-left: 5px solid #673ab7;
-  z-index: 50;
 }
 
 #intro-photo {
@@ -497,7 +488,6 @@ a:hover {
 }
 
 #intro-text {
-  border-bottom: 5px solid #673ab7;
   padding: 0px 15px;
   text-align: center;
 }
@@ -514,16 +504,5 @@ a:hover {
 
 .layer {
   background-color: #eee4ff;
-}
-
-.layer-1 {
-  flex: 1;
-}
-
-.layer-2 {
-  flex: 1;
-}
-
-.layer-3 {
   flex: 1;
 }

@@ -22,9 +22,6 @@
       </div>
       
       <section id="intro">
-        <!-- <h1 class="big-header-main">Hello, I'm <span style="color: #9366e3">Sabrina Snider</span>.</h1>
-        <h2 class="sub-header-main">I like writing code.</h2> -->
-        <!-- <div id="programming-image-container"><img id="programming-image" src="static-files/images/programming.svg"></div> -->
         <div id="intro-content">
           <div>
             <div id="intro-text">
@@ -187,6 +184,21 @@
       gsap.to('.layer-2', { y: '-100vh', delay: .7 });
       gsap.to('.layer-3', { y: '-100vh', delay: .9 });
       gsap.to('#overlay', { y: '-100vh', delay: 1.5 });
+
+      gsap.fromTo('.circle-small', 
+        { x: '10rem', opacity: 0 }, 
+        { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 1.3 }
+      );
+
+      gsap.fromTo('.circle-large', 
+        { x: '-10rem', opacity: 0 }, 
+        { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 1.9 }
+      );
+
+      gsap.fromTo('#intro-content', 
+        { x: '30rem', opacity: 0 }, 
+        { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 2.5 }
+      );
     </script>
   </body>
 </html>
