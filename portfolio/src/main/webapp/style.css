@@ -457,11 +457,45 @@ a:hover {
 }
 
 .circle-large {
-  bottom: -10rem;
-  right: -10rem;
+  bottom: -12rem;
+  right: -12rem;
 }
 
 #circle-image-large {
   height: 45rem;
   width: 45rem;
+}
+
+/* #programming-image-container {
+  z-index: 50;
+}
+
+#programming-image {
+  height: 30rem;
+  width: 30rem;
+} */
+
+#intro-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#intro-photo-container {
+  padding-bottom: 8px;
+  padding-left: 8px;
+  border-bottom: 5px solid #673ab7;
+  border-left: 5px solid #673ab7;
+  z-index: 50;
+}
+
+#intro-photo {
+  height: 30rem;
+  width: 30rem;
+}
+
+#intro-text {
+  border-bottom: 5px solid #673ab7;
+  padding: 0px 15px;
 }
