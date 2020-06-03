@@ -12,6 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* Create a new HTML element */
+function createElementWithParams (tagName, id, classes, events, innerText) {
+  const el = document.createElement(tagName);
+
+  if (id) el.id = id;
+
+  if (classes) {
+    classes.forEach((className) => {
+      el.classList.add(className);
+    });
+  }
+
+  if (events) {
+    Object.keys(events).forEach((key) => {
+      if (typeof events[key] === 'function') {
+        console.log("event is", key, typeof events[key])
+        el.addEventListener(key, events [key]);
+      }
+    });
+  }
+
+  if (innerText) el.innerText = innerText;
+
+  return el;
+}
+
 /* Toggles the sort between ascending and descending, then updates comments */
 function toggleSort() {
   const sortDirectionIcon = document.getElementById("sort-icon");
@@ -27,7 +53,7 @@ function toggleSort() {
 
 /* Deletes a single comment from the page and from datastore */
 function deleteComment(id) {
-  fetch('/delete-comment?id='.concat(id), { method: "post" }).then(() => {
+  fetch('/delete-comment?id=' + id, { method: "post" }).then(() => {
     window.location.reload();
   })
 }
@@ -52,15 +78,15 @@ function getComments() {
   const sortSelector = document.getElementById('comment-sort-select');
   const maxSelector = document.getElementById('comment-max-select');
   const sortDirectionIcon = document.getElementById("sort-icon");
-  
+
   const sort = sortSelector.options[sortSelector.selectedIndex].value;
   const max = maxSelector.options[maxSelector.selectedIndex].value;
-  const ascending = sortDirectionIcon.classList[0] === "sort-up" ? "true" : "false";
+  const ascending = sortDirectionIcon.classList.contains("sort-up") ? "true" : "false";
 
-  const query = "?sort=".concat(sort).concat("&max=").concat(max).concat("&ascending=").concat(ascending);
+  const query = `?sort=${sort}&max=${max}&ascending=${ascending}`;
 
   container.innerHTML = "";
-  fetch('/list-comments'.concat(query)).then(response => response.json()).then(data => {
+  fetch('/list-comments' + query).then(response => response.json()).then(data => {
     data.forEach(comment => {
       container.appendChild(
         addComment(comment)
@@ -72,21 +98,26 @@ function getComments() {
 
 /* Creates an <li> element containing text. */
 function addComment(comment) {
-  const commentItem = document.createElement("li");
-  const commentHeader = document.createElement("div");
-  const commentName = document.createElement("p");
-  const commentMessage = document.createElement("p");
-  const commentDelete = document.createElement("img");
+  console.log("creating comment");
+  const commentItem = createElementWithParams(
+    "li", undefined, ["comment"], undefined, undefined
+  )
 
-  commentItem.classList.add("comment");
-  commentHeader.classList.add("comment-header");
-  commentName.classList.add("comment-name");
-  commentMessage.classList.add("comment-message");
-  commentDelete.classList.add("comment-delete");
+  const commentHeader = createElementWithParams(
+    "div", undefined, ["comment-header"], undefined, undefined
+  )
 
-  commentName.innerText = comment.name;
-  commentMessage.innerText = comment.message;
-  commentDelete.onclick = function() { deleteComment(comment.id); }; 
+  const commentName = createElementWithParams(
+    "p", undefined, ["comment-name"], undefined, comment.name
+  )
+
+  const commentMessage = createElementWithParams(
+    "p", undefined, ["comment-message"], undefined, comment.message
+  )
+
+  const commentDelete = createElementWithParams(
+    "img", undefined, ["comment-delete"], { "click": () => deleteComment(comment.id) }, undefined
+  ) 
 
   commentItem.appendChild(commentHeader);
   commentHeader.appendChild(commentName);

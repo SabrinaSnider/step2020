@@ -1,17 +1,18 @@
 package structures;
 
+import com.google.appengine.api.datastore.Entity;
+
 public class Comment {
   private long id;
   private String name;
   private long timestamp;
   private String message;
 
-
-  public Comment(long id, String name, long timestamp, String message) {
-    this.id = id;
-    this.name = name;
-    this.timestamp = timestamp;
-    this.message = message;
+  public Comment(Entity commentEntity) {
+    this.id = commentEntity.getKey().getId();
+    this.name = (String) commentEntity.getProperty("name");
+    this.timestamp = (long) commentEntity.getProperty("timestamp");
+    this.message = (String) commentEntity.getProperty("message");
   }
 
   public long getId() { return id; }

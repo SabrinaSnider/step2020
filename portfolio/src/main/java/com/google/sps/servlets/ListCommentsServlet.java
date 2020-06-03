@@ -63,13 +63,7 @@ public class ListCommentsServlet extends HttpServlet {
     List<Comment> comments = new ArrayList<>();
     for (Entity commentEntity : queriedComments.asIterable()) {
       if (comments.size() >= maxComments) break;
-
-      long id = commentEntity.getKey().getId();
-      String name = (String) commentEntity.getProperty("name");
-      long timestamp = (long) commentEntity.getProperty("timestamp");
-      String message = (String) commentEntity.getProperty("message");
-
-      Comment comment = new Comment(id, name, timestamp, message);
+      Comment comment = new Comment(commentEntity);
       comments.add(comment);
     }
 
