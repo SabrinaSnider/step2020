@@ -38,10 +38,8 @@ public class DeleteCommentServlet extends HttpServlet {
   /* Removes the request comment from the datastore */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    System.out.println("delete post method");
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     long id = Long.parseLong(request.getParameter("id"));
-    System.out.println("id is" + id);
 
     try {
       Entity comment = datastore.get(KeyFactory.createKey("Comment", id));
