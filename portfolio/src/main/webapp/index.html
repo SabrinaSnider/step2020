@@ -27,7 +27,13 @@
             <div id="intro-text">
               <h2 class="sub-header-main">Hello World!</h2>
               <h1 class="big-header-main">I'm <span style="color: #9366e3">Sabrina</span> and I like to code</h1>
-              <a class="white-button" href="#about-me-section">View my portfolio</a>
+              <a id="portfolio-button" class="white-button" href="#about-me-section"
+                onmouseover="portfolioBtnHoverOn()"
+                onmouseout="portfolioBtnHoverOff()"
+              >
+                View my portfolio
+                <img id="portfolio-arrow" src="static-files/images/icons/arrow.svg" >
+              </a>
             </div>
           </div>
 
@@ -180,27 +186,6 @@
 
     <!-- GSAP and animation scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.0/gsap.js" integrity="sha256-6XkFW5TxJs4szKCpO2psd/MCRA5QZ0PFoiym+2CaSqg=" crossorigin="anonymous"></script>
-    <script>
-      gsap.to('.layer-1', { y: '-100vh', delay: .5 });
-      gsap.to('.layer-2', { y: '-100vh', delay: .7 });
-      gsap.to('.layer-3', { y: '-100vh', delay: .9 });
-      gsap.to('#overlay', { y: '-100vh', delay: 1.5 });
-      gsap.to('.circle', 20, { rotation:"360", ease:Linear.easeNone, repeat:-1 });
-
-      gsap.fromTo('.circle-small', 
-        { x: '10rem', opacity: 0 }, 
-        { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 1.3 }
-      );
-
-      gsap.fromTo('.circle-large', 
-        { x: '-10rem', opacity: 0 }, 
-        { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 1.9 }
-      );
-
-      gsap.fromTo('#intro-content', 
-        { x: '30rem', opacity: 0 }, 
-        { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 2.5 }
-      );
-    </script>
+    <script src="animations.js"></script>
   </body>
 </html>

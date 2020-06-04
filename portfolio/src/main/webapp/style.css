@@ -205,15 +205,17 @@ a:hover {
 
 .white-button {
   color: #ede7f6;
-  border: 5px solid #ede7f6;
+  border: 1.5px solid #ede7f6;
   border-radius: 5px;
   padding: 10px;
   margin: 0px 10px;
   font-weight: bold;
   display: inline-block;
+  font-size: 1.1rem;
+  margin: 10px;
 }
 
-.white-button:hover {
+.white-button:hover:not(#portfolio-button) {
   background-color: #ede7f6;
   color: #263238;
 }
@@ -322,7 +324,6 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* background-color: #263238; */
   background-color: transparent;
   align-items: center;
   padding: 20px;
@@ -381,8 +382,7 @@ a:hover {
 }
 
 #resume-button {
-  border-width: 1.5px;
-  font-size: 1.1rem;
+  margin: 0px;
 }
 
 #toggle-message-section {
@@ -505,4 +505,10 @@ a:hover {
 .layer {
   background-color: #eee4ff;
   flex: 1;
+}
+
+#portfolio-arrow {
+  height: 20px;
+  vertical-align: middle;
+  margin-left: 3px;
 }
