@@ -44,3 +44,16 @@ function fadeButton(id, backgroundColor, borderColor, textColor, easeDuration) {
     ease:`power1.out(${easeDuration})` 
   })
 }
+
+/* Scroll to load content */
+const timelineScroll = new TimelineMax({ onUpdate: () => { timelineScroll.progress(); } });
+const controller = new ScrollMagic.Controller();
+
+timelineScroll.from(".work-item", .5, { y: '50vh', opacity: 0 })
+
+const workSectionAnimation = new ScrollMagic.Scene({
+  triggerElement: "#work-section",
+  triggerHook: "onEnter",
+  duration: "100%",
+})
+workSectionAnimation.setTween(timelineScroll).addTo(controller)

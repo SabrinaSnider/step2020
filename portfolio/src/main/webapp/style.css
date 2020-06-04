@@ -130,35 +130,6 @@ a:hover {
   padding-top: 0px;
 }
 
-.skillbar-outline {
-  background-color: transparent;
-  width: 100%;
-  border: 2px solid #263238;
-}
-
-.skillbar {
-  text-align: right;
-  padding: 10px auto;
-  color: white;
-  background-color: #673ab7;
-  padding: 5px;
-}
-
-.java-bar {width: 90%;}
-.cpp-bar {width: 80%;}
-.html-bar {width: 70%;}
-.css-bar {width: 70%;}
-.javascript-bar {width: 50%;}
-.python-bar {width: 50%;}
-
-.skill-label {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  margin-left: 0;
-  padding-left: 0;
-  font-size: 1.2rem;
-}
-
 .work-item {
   border-radius: 20px;
   background-color: #ede7f6;
@@ -358,23 +329,6 @@ a:hover {
   box-sizing: border-box;
   overflow: hidden;
   position: relative;;
-}
-
-#about-me-content {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-}
-
-#bio-content {
-  width: 500px;
-  margin-right: 10px;
-}
-
-#skills-content {
-  flex-grow: 1;
-  margin-left: 10px;
-  border-radius: 5px;
 }
 
 #work-button {
