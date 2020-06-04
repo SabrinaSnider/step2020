@@ -116,18 +116,44 @@ a:hover {
 }
 
 .section-header {
-  border-bottom: 3px solid #673ab7;
   color: #673ab7;
   padding: 10px;
   margin: 50px auto;
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: bold;
   width: fit-content;
+  font-family: 'Inconsolata', monospace;
+  position: relative;
+}
+
+.section-header span:before,
+.section-header span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-top: 1px solid #673ab7;
+  top: 50%;
+  width: 80%;
+}
+
+.section-header span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.section-header span:after {
+  left: 100%;
+  margin-left: 15px;
 }
 
 .remove-top-spacing {
   margin-top: 0px;
   padding-top: 0px;
+}
+
+#aboutme-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .work-item {
@@ -279,15 +305,6 @@ a:hover {
   margin: 40px;
 }
 
-#selfie {
-  padding: 20px;
-  border-radius: 7px;
-  width: 300px;
-  height: 300px;
-  border-bottom: 7px solid #673ab7;
-  border-left: 7px solid #673ab7;
-}
-
 #content {
   margin-left: auto;
   margin-right: auto;
@@ -331,6 +348,26 @@ a:hover {
   position: relative;;
 }
 
+#selfie {
+  height: 25rem;
+  width: 25rem;
+  border-bottom: 5px solid #673ab7;
+  border-left: 5px solid #673ab7;
+  padding-bottom: 8px;
+  padding-left: 8px;
+}
+
+#bio { 
+  width: 50%; 
+  text-align: center;
+  padding: 20px;
+}
+
+#skills { 
+  width: 50%; 
+  padding: 20px;
+}
+
 #work-button {
   margin-top: 10px;
   border-width: 3px;
@@ -339,16 +376,6 @@ a:hover {
 
 #resume-button {
   margin: 0px;
-}
-
-#toggle-message-section {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-#greeting-container {
-  margin: 12px;
 }
 
 #comment-content {
@@ -429,18 +456,6 @@ a:hover {
   align-items: center;
   max-width: 1000px;
   z-index: 50;
-}
-
-#intro-photo-container {
-  padding-bottom: 8px;
-  padding-left: 8px;
-  border-bottom: 5px solid #673ab7;
-  border-left: 5px solid #673ab7;
-}
-
-#intro-photo {
-  height: 30rem;
-  width: 30rem;
 }
 
 #intro-text {

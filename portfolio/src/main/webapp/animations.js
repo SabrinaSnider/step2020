@@ -46,14 +46,14 @@ function fadeButton(id, backgroundColor, borderColor, textColor, easeDuration) {
 }
 
 /* Scroll to load content */
-const timelineScroll = new TimelineMax({ onUpdate: () => { timelineScroll.progress(); } });
-const controller = new ScrollMagic.Controller();
+const scrollTimeline = new TimelineMax({ onUpdate: () => { scrollTimeline.progress(); } });
+const scrollController = new ScrollMagic.Controller();
 
-timelineScroll.from(".work-item", .5, { y: '50vh', opacity: 0 })
+scrollTimeline.from(".work-item", 1, { x: '-50vh', opacity: 0 })
 
 const workSectionAnimation = new ScrollMagic.Scene({
   triggerElement: "#work-section",
-  triggerHook: "onEnter",
+  triggerHook: .75, //show when scrolled 25% into view
   duration: "100%",
 })
-workSectionAnimation.setTween(timelineScroll).addTo(controller)
+workSectionAnimation.setTween(scrollTimeline).addTo(scrollController)
