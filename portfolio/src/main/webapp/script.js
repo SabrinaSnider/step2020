@@ -12,6 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* Create a new HTML element */
+function createElementWithParams (tag, {
+  className = "",
+  innerText = "",
+  onclick = undefined,
+} = {}) {
+  const el = document.createElement(tag);
+
+  el.classList.add(className);
+  el.innerText = innerText
+  el.onclick = onclick;
+
+  return el;
+}
+
 /* Toggles the sort between ascending and descending, then updates comments */
 function toggleSort() {
   const sortDirectionIcon = document.getElementById("sort-icon");
@@ -25,7 +40,28 @@ function toggleSort() {
   getComments();
 }
 
-/* Fetches comment json data data from /comment and displays them */
+/* Deletes a single comment from the page and from datastore */
+function deleteComment(id) {
+  console.log("delete comment")
+  fetch('/delete-comment?id=' + id, { method: "post" }).then(() => {
+    window.location.reload();
+  })
+}
+
+/* Deletes all of the comments from the page and from datastore */
+function deleteAllComments() {
+  fetch('/delete-all-comments', { method: "post" }).then(() => {
+    window.location.reload();
+  })
+}
+
+/* Toggle on the delete all button if comments exist */
+function toggleDeleteAllButton(show) {
+  const deleteAllButton = document.getElementById("delete-all-button");
+  deleteAllButton.style.display = show ? "block" : "none";
+}
+
+/* Fetches comment data from /comment-list and displays them */
 function getComments() {
   const container = document.getElementById("comment-list");
 
@@ -46,23 +82,34 @@ function getComments() {
         addComment(comment)
       );
     });
+    Object.keys(data).length > 0 ? toggleDeleteAllButton(true) : toggleDeleteAllButton(false);
   })
 }
 
-/* Creates an <li> element containing text. */
+/* Creates an <li> element with comment information */
 function addComment(comment) {
-  const commentItem = document.createElement("li");
-  const commentName = document.createElement("p");
-  const commentMessage = document.createElement("p");
+  const commentItem = createElementWithParams("li", { className: "comment" })
+  const commentHeader = createElementWithParams("div", { className: "comment-header" })
 
-  commentItem.classList.add("comment");
-  commentName.classList.add("comment-name");
-  commentMessage.classList.add("comment-message");
+  const commentName = createElementWithParams("p", { 
+    className: "comment-name", 
+    innerText: comment.name,
+  })
 
-  commentName.innerText = comment.name;
-  commentMessage.innerText = comment.message
+  const commentMessage = createElementWithParams("p", { 
+    className: "comment-message", 
+    innerText: comment.message,
+  })
 
-  commentItem.appendChild(commentName);
+  const commentDelete = createElementWithParams("img", { 
+    className: "comment-delete", 
+    onclick: () => deleteComment(comment.id),
+  }) 
+
+  commentItem.appendChild(commentHeader);
+  commentHeader.appendChild(commentName);
+  commentHeader.appendChild(commentDelete);
   commentItem.appendChild(commentMessage);
+  
   return commentItem;
 }
