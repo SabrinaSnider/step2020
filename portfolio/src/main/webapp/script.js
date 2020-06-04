@@ -13,27 +13,16 @@
 // limitations under the License.
 
 /* Create a new HTML element */
-function createElementWithParams (tagName, id, classes, events, innerText) {
-  const el = document.createElement(tagName);
+function createElementWithParams (tag, {
+  className = "",
+  innerText = "",
+  event = undefined
+} = {}) {
+  const el = document.createElement(tag);
 
-  if (id) el.id = id;
-
-  if (classes) {
-    classes.forEach((className) => {
-      el.classList.add(className);
-    });
-  }
-
-  if (events) {
-    Object.keys(events).forEach((key) => {
-      if (typeof events[key] === 'function') {
-        console.log("event is", key, typeof events[key])
-        el.addEventListener(key, events [key]);
-      }
-    });
-  }
-
-  if (innerText) el.innerText = innerText;
+  el.classList.add(className);;
+  el.innerText = innerText
+  if (event) { el.addEventListener('click', event); }
 
   return el;
 }
@@ -109,26 +98,23 @@ function getComments() {
 
 /* Creates an <li> element containing text. */
 function addComment(comment) {
-  console.log("creating comment");
-  const commentItem = createElementWithParams(
-    "li", undefined, ["comment"], undefined, undefined
-  )
+  const commentItem = createElementWithParams("li", { className: "comment" })
+  const commentHeader = createElementWithParams("div", { className: "comment-header" })
 
-  const commentHeader = createElementWithParams(
-    "div", undefined, ["comment-header"], undefined, undefined
-  )
+  const commentName = createElementWithParams("p", { 
+    className: "comment-name", 
+    innerText: comment.name 
+  })
 
-  const commentName = createElementWithParams(
-    "p", undefined, ["comment-name"], undefined, comment.name
-  )
+  const commentMessage = createElementWithParams("p", { 
+    className: "comment-message", 
+    innerText: comment.message 
+  })
 
-  const commentMessage = createElementWithParams(
-    "p", undefined, ["comment-message"], undefined, comment.message
-  )
-
-  const commentDelete = createElementWithParams(
-    "img", undefined, ["comment-delete"], { "click": () => deleteComment(comment.id) }, undefined
-  ) 
+  const commentDelete = createElementWithParams("img", { 
+    className: "comment-delete", 
+    event: { "click": () => deleteComment(comment.id) } 
+  }) 
 
   commentItem.appendChild(commentHeader);
   commentHeader.appendChild(commentName);
