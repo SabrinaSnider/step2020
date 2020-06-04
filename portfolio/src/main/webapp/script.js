@@ -16,13 +16,14 @@
 function createElementWithParams (tag, {
   className = "",
   innerText = "",
-  event = undefined
+
+  onclick = undefined,
 } = {}) {
   const el = document.createElement(tag);
 
-  el.classList.add(className);;
+  el.classList.add(className);
   el.innerText = innerText
-  if (event) { el.addEventListener('click', event); }
+  el.onclick = onclick;
 
   return el;
 }
@@ -71,7 +72,7 @@ function toggleDeleteAllButton(show) {
   deleteAllButton.style.display = show ? "block" : "none";
 }
 
-/* Fetches comment json data data from /comment and displays them */
+/* Fetches comment data from /comment-list and displays them */
 function getComments() {
   const container = document.getElementById("comment-list");
 
@@ -96,24 +97,24 @@ function getComments() {
   })
 }
 
-/* Creates an <li> element containing text. */
+/* Creates an <li> element with comment information */
 function addComment(comment) {
   const commentItem = createElementWithParams("li", { className: "comment" })
   const commentHeader = createElementWithParams("div", { className: "comment-header" })
 
   const commentName = createElementWithParams("p", { 
     className: "comment-name", 
-    innerText: comment.name 
+    innerText: comment.name,
   })
 
   const commentMessage = createElementWithParams("p", { 
     className: "comment-message", 
-    innerText: comment.message 
+    innerText: comment.message,
   })
 
   const commentDelete = createElementWithParams("img", { 
     className: "comment-delete", 
-    event: { "click": () => deleteComment(comment.id) } 
+    onclick: () => deleteComment(comment.id),
   }) 
 
   commentItem.appendChild(commentHeader);
