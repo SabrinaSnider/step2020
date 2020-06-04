@@ -27,6 +27,7 @@
             <div id="intro-text">
               <h2 class="sub-header-main">Hello World!</h2>
               <h1 class="big-header-main">I'm <span style="color: #9366e3">Sabrina</span> and I like to code</h1>
+              <a class="white-button" href="#about-me-section">View my portfolio</a>
             </div>
           </div>
 
@@ -184,6 +185,7 @@
       gsap.to('.layer-2', { y: '-100vh', delay: .7 });
       gsap.to('.layer-3', { y: '-100vh', delay: .9 });
       gsap.to('#overlay', { y: '-100vh', delay: 1.5 });
+      gsap.to('.circle', 20, { rotation:"360", ease:Linear.easeNone, repeat:-1 });
 
       gsap.fromTo('.circle-small', 
         { x: '10rem', opacity: 0 }, 
