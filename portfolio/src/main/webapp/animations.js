@@ -45,6 +45,20 @@ function fadeButton(id, backgroundColor, borderColor, textColor, easeDuration) {
   })
 }
 
+// Change skill dots on/off hover
+function toggleDot(id, years) {
+  const dot = document.getElementById(id);
+  if (dot.classList.contains('flipped')) {
+    dot.classList.remove('flipped');
+    gsap.to("#" + id, 1, { backgroundColor: '#b39ddb' })
+    dot.innerText = id;
+  } else {
+    dot.classList.add('flipped');
+    gsap.to("#" + id, 1, { backgroundColor: '#673ab7' })
+    dot.innerText = years + " years"
+  }
+}
+
 /* Scroll to load content */
 const scrollTimeline = new TimelineMax({ onUpdate: () => { scrollTimeline.progress(); } });
 const scrollController = new ScrollMagic.Controller();
@@ -57,17 +71,7 @@ scrollTimeline.from("#selfie", 1, { x: '-20vh', opacity: 0}, "=-1")
 
 const aboutmeSectionAnimation = new ScrollMagic.Scene({
   triggerElement: "#about-me-section",
-  triggerHook: 1,
+  triggerHook: .95,
   duration: "100%",
 })
 aboutmeSectionAnimation.setTween(scrollTimeline).addTo(scrollController)
-
-// work
-// scrollTimeline.from(".work-item", 1, { x: '-50vh', opacity: 0 })
-
-// const workSectionAnimation = new ScrollMagic.Scene({
-//   triggerElement: "#work-section",
-//   triggerHook: 1, //show when scrolled 25% into view
-//   duration: "100%",
-// })
-// workSectionAnimation.setTween(scrollTimeline).addTo(scrollController)
