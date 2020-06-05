@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="scripts/comments.js"></script>
   </head>
-  <body onload="getComments();" onscroll="navbarColorScroll()">
+  <body onload="getComments();">
     <div id="content">
       <section id="intro">
         <div id="intro-content">
@@ -17,9 +17,8 @@
             <h1 id="sub-header-main" class="sub-header-main">></h1>
             <div id="portfolio-button-container">
               <a id="portfolio-button" class="white-button" href="#about-me-section"
-                onmouseover="portfolioBtnHoverOn()"
-                onmouseout="portfolioBtnHoverOff()"
-              >
+                onmouseover="portfolioButtonHoverOn()"
+                onmouseout="portfolioButtonHoverOff()">
                 View my portfolio
                 <img id="portfolio-arrow" src="static-files/images/icons/arrow.svg" >
               </a>
@@ -43,13 +42,13 @@
       </div>
 
       <div id="overlay">
-        <div class="layer layer-1"></div>
-        <div class="layer layer-2"></div>
-        <div class="layer layer-3"></div>
+        <div class="layer layer-left"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-right"></div>
       </div>
 
       <section id="about-me-section" class="white-background">
-        <h1 class="section-header about-me"><span>About Me</span></h1>
+        <h1 id="about-me-title" class="section-header"><span>About Me</span></h1>
         <div id="about-me-content" class="section-content">
           <div id="selfie-container">
             <img id="selfie" src="./static-files/images/selfie.jpg">
@@ -61,14 +60,14 @@
             </p>
             <div id="skills">
               <div class="row">
-                <span id="Java" class="dot" onmouseover="toggleDot('Java', 5)" onmouseout="toggleDot('Java', 5)">Java</span>
-                <span id="Python" class="dot" onmouseover="toggleDot('Python', 3)" onmouseout="toggleDot('Python', 5)">Python</span>
-                <span id="Cpp" class="dot" onmouseover="toggleDot('Cpp', 2)" onmouseout="toggleDot('Cpp', 5)">Cpp</span>
+                <span class="programming-language" data-language="Java" data-years="5 years"></span>
+                <span class="programming-language" data-language="Python" data-years="3 years"></span>
+                <span class="programming-language" data-language="C++" data-years="2 years"></span>
               </div>
               <div class="row">
-                <span id="HTML" class="dot" onmouseover="toggleDot('HTML', 3)" onmouseout="toggleDot('HTML', 5)">HTML</span>
-                <span id="CSS" class="dot" onmouseover="toggleDot('CSS', 3)" onmouseout="toggleDot('CSS', 5)">CSS</span>
-                <span id="Javascript" class="dot" onmouseover="toggleDot('Javascript', 1)" onmouseout="toggleDot('Javascript', 5)">Javascript</span>
+                <span class="programming-language" data-language="HTML" data-years="3 years"></span>
+                <span class="programming-language" data-language="CSS" data-years="3 years"></span>
+                <span class="programming-language" data-language="Javascript" data-years="1 year"></span>
               </div>
             </div>
           </div>
@@ -178,6 +177,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+    <script src="https://unpkg.com/ityped@1.0.3"></script>
     <script src="scripts/animations.js"></script>
   </body>
 </html>
