@@ -1,4 +1,4 @@
-/*--DEFAULT TAGS--*/
+/* DEFAULT TAGS */
 html { 
   scroll-behavior: smooth; 
 } 
@@ -36,27 +36,33 @@ select {
 }
 
 input {
+  /* Display */
   border: 1px solid #d6d6d6;
-  padding: 5px 10px;
-  font-size: 1rem;
-  margin: 10px 0px;
   border-radius: 2px;
-  background-color: white;
+  padding: 5px 10px;
+  margin: 10px 0px;
   width: 100%;
+  /* Layout */
   box-sizing: border-box;
+  /* Content */
+  background-color: white;
+  font-size: 1rem;
   font-family: inherit;
   font-size: inherit;
 }
 
 textarea {
+  /* Display */
   border: 1px solid #d6d6d6;
-  padding: 5px 10px;
-  font-size: 1rem;
-  margin: 10px 0px;
   border-radius: 2px;
-  background-color: white;
+  padding: 5px 10px;
+  margin: 10px 0px;
   width: 100%;
+  /* Layout */
   box-sizing: border-box;
+  /* Content */
+  background-color: white;
+  font-size: 1rem;
   font-family: inherit;
   font-size: inherit;
 }
@@ -73,18 +79,23 @@ a:hover {
   color: #ede7f6;
 }
 
-/*--CONTENT-SPECIFIC--*/
+/* CONTENT-SPECIFIC */
 
-/* Generic */
+/* Generic content styles */
 .section-header {
-  color: #673ab7;
+  /* Display */
   padding: 10px;
   margin: 50px auto 20px;
+  width: fit-content;
+  /* Layout */
+  position: relative;
+  /* Content */
+  color: #673ab7;
   font-size: 3rem;
   font-weight: bold;
-  width: fit-content;
-  position: relative;
 }
+
+/* Horizontal lines by section header */
 .section-header span:before,
 .section-header span:after {
   content: "";
@@ -118,15 +129,17 @@ a:hover {
 }
 
 .white-button {
-  color: #ede7f6;
+  /* Display */
   border: 1.5px solid #ede7f6;
   border-radius: 5px;
   padding: 10px;
-  margin: 0px 10px;
-  font-weight: bold;
-  display: inline-block;
-  font-size: 1.1rem;
   margin: 10px;
+  /* Layout */
+  display: inline-block;
+  /* Content */
+  color: #ede7f6;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .white-button:hover:not(#portfolio-button) {
@@ -135,13 +148,16 @@ a:hover {
 }
 
 .purple-button {
-  color: #673ab7;
+  /* Display */
   border: 2px solid #673ab7;
   border-radius: 5px;
   padding: 10px;
   margin: 0px 10px;
-  font-weight: bold;
+  /* Layout */
   display: inline-block;
+  /* Content */
+  font-weight: bold;
+  color: #673ab7;
 }
 
 .purple-button:hover {
@@ -150,13 +166,16 @@ a:hover {
 }
 
 .gray-button {
-  color: #263238;
+  /* Display */
   border: 2px solid #263238;
   border-radius: 5px;
   padding: 10px;
   margin: 0px 10px;
-  font-weight: bold;
+  /* Layout */
   display: inline-block;
+  /* Content */
+  font-weight: bold;
+  color: #263238;
 }
 
 .gray-button:hover {
@@ -168,19 +187,21 @@ a:hover {
 /* Navigation */
 
 #navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: transparent;
-  align-items: center;
-  box-sizing: border-box;
-  position: sticky;
-  top: 0;
+  /* Display */
+  height: 4rem;
   padding: 20px;
   width: 100%;
   z-index: 100;
+  top: 0;
+  /* Layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  position: sticky;
+  /* Content */
   background-color: #263238;
-  height: 4rem;
 }
 
 #nav-name {
@@ -233,6 +254,7 @@ a:hover {
 
 #intro-content {
   width: 95%;
+  z-index: 100;
 }
 
 #intro-text {
@@ -307,15 +329,18 @@ a:hover {
 }
 
 #intro {
+  /* Display */
   height: 100vh;
-  background-color: #263238;
+  /* Layout */
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
   box-sizing: border-box;
   overflow: hidden;
-  position: relative;;
+  position: relative;
+  /* Content */
+  background-color: #263238;
 }
 
 #selfie {
@@ -347,42 +372,63 @@ a:hover {
   justify-content: space-evenly;
 }
 
-.dot {
+.programming-language {
+  /* Display */
   height: 130px;
   width: 130px;
   border-radius: 50%;
+  transition: background-color .6s;
+  /* Layout */
   margin: 10px;
-  background-color: #b39ddb;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* Content */
+  background-color: #b39ddb;
   color: white;
   font-weight: bold;
   font-size: 1.5rem;
 }
 
+.programming-language:hover {
+  background-color: #673ab7;
+}
+
+.programming-language:after {
+  content: attr(data-language);
+}
+
+.programming-language:hover:after {
+  content: attr(data-years);
+}
+
 /* Work */
 .work-header {
-  flex-shrink: 0;
-  flex-grow: 0;
+  /* Display */
   padding: 20px;
   width: 30%;
   margin: 0px;
+  /* Layout */
+  flex-shrink: 0;
+  flex-grow: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* Content */
   background-color: #673ab7;
 }
 
 .work-item {
-  border-radius: 20px;
-  background-color: #ede7f6;
+  /* Display */
   margin: 50px;
+  height: 180px;
+  border-radius: 20px;
+  /* Layout */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 12vh;
-  height: 180px;
+  /* Content */
+  background-color: #ede7f6;
 }
 
 .work-title {
