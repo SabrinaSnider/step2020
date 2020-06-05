@@ -65,13 +65,23 @@ const scrollController = new ScrollMagic.Controller();
 
 
 // about me
-scrollTimeline.from("#selfie-container", 1, { x: '-20vh', opacity: 0 })
-scrollTimeline.from("#bio", 1, { x: '20vh', opacity: 0}, "=-.5")
-scrollTimeline.from("#selfie", 1, { x: '-20vh', opacity: 0}, "=-1")
+const aboutmeAnimation = new TimelineMax();
 
-const aboutmeSectionAnimation = new ScrollMagic.Scene({
+scrollTimeline.from(".section-header.about-me", 1, { opacity: 0 })
+
+const aboutmeTitleAnimation = new ScrollMagic.Scene({
   triggerElement: "#about-me-section",
-  triggerHook: .95,
+  triggerHook: .5,
   duration: "100%",
 })
-aboutmeSectionAnimation.setTween(scrollTimeline).addTo(scrollController)
+
+aboutmeAnimation.from("#selfie-container", 1, { x: '-20vh', opacity: 0 })
+aboutmeAnimation.from("#bio", 1, { x: '20vh', opacity: 0}, "=-.5")
+aboutmeAnimation.from("#selfie", 1, { x: '-20vh', opacity: 0}, "=-1")
+
+const aboutmeSectionAnimation = new ScrollMagic.Scene({
+  triggerElement: ".section-header.about-me",
+})
+
+aboutmeTitleAnimation.setTween(scrollTimeline).addTo(scrollController)
+aboutmeSectionAnimation.setTween(aboutmeAnimation).addTo(scrollController)
