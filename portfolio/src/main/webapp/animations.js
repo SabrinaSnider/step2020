@@ -49,11 +49,25 @@ function fadeButton(id, backgroundColor, borderColor, textColor, easeDuration) {
 const scrollTimeline = new TimelineMax({ onUpdate: () => { scrollTimeline.progress(); } });
 const scrollController = new ScrollMagic.Controller();
 
-scrollTimeline.from(".work-item", 1, { x: '-50vh', opacity: 0 })
 
-const workSectionAnimation = new ScrollMagic.Scene({
-  triggerElement: "#work-section",
-  triggerHook: .75, //show when scrolled 25% into view
+// about me
+scrollTimeline.from("#selfie-container", 1, { x: '-20vh', opacity: 0 })
+scrollTimeline.from("#bio", 1, { x: '20vh', opacity: 0}, "=-.5")
+scrollTimeline.from("#selfie", 1, { x: '-20vh', opacity: 0}, "=-1")
+
+const aboutmeSectionAnimation = new ScrollMagic.Scene({
+  triggerElement: "#about-me-section",
+  triggerHook: 1,
   duration: "100%",
 })
-workSectionAnimation.setTween(scrollTimeline).addTo(scrollController)
+aboutmeSectionAnimation.setTween(scrollTimeline).addTo(scrollController)
+
+// work
+// scrollTimeline.from(".work-item", 1, { x: '-50vh', opacity: 0 })
+
+// const workSectionAnimation = new ScrollMagic.Scene({
+//   triggerElement: "#work-section",
+//   triggerHook: 1, //show when scrolled 25% into view
+//   duration: "100%",
+// })
+// workSectionAnimation.setTween(scrollTimeline).addTo(scrollController)

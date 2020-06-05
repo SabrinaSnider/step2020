@@ -155,6 +155,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .work-item {
