@@ -232,15 +232,12 @@ a:hover {
 }
 
 #intro-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  z-index: 50;
+  width: 95%;
 }
 
 #intro-text {
   padding: 0px 15px;
+  width: 100%;
   text-align: left;
   font-family: 'Inconsolata', monospace;
 }

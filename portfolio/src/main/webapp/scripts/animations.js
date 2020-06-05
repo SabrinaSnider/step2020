@@ -6,20 +6,36 @@ gsap.to('.layer-3', { y: '-100vh', delay: .9 });
 gsap.to('#overlay', { y: '-100vh', delay: 1.5 });
 gsap.to('.circle', 20, { rotation:"360", ease: Linear.easeNone, repeat: -1 });
 
-gsap.fromTo('.circle-small', 
-  { x: '10rem', opacity: 0 }, 
-  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 1.8 }
-);
+setTimeout(() =>
+  type('big-header-main', '>Hi, my name is <span style="color: #9366e3; font-weight: bold;">Sabrina</span>', 1),
+  2000
+)
+setTimeout(() =>
+  type('sub-header-main', '>I like to code', 1),
+  5000
+)
 
-gsap.fromTo('.circle-large', 
-  { x: '-10rem', opacity: 0 }, 
-  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 2.5 }
-);
-
-gsap.fromTo('#intro-content', 2,
+gsap.fromTo('#portfolio-button', 2,
   { opacity: 0 }, 
-  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 3.2 }
+  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 7.5 }
 );
+
+/* Typewriter effect for title*/
+function type(id, text, i = 0, isTag = false) {
+  if (i === text.length) return;
+  var newText = text.slice(0, ++i); // get text + new char
+
+  document.getElementById(id).innerHTML = newText;
+
+  if (newText.slice(-1) === '<') {
+    isTag = true;
+  } else if (newText.slice(-1) === '>') {
+    isTag = false;
+  }
+
+  if (isTag) return type(id, text, i, true); // if tag, add without delay
+  setTimeout(() => type(id, text, i), 100); // if not a tag, add with a delay
+}
 
 /* event handlers */
 
