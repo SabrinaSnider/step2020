@@ -292,6 +292,27 @@ a:hover {
   cursor: pointer; 
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.dot {
+  height: 130px;
+  width: 130px;
+  background-color: blue;
+  border-radius: 50%;
+  margin: 10px;
+  background-color: #9f8cb3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
 .footer {
   background-color: #263238;
   display: flex;
@@ -324,7 +345,6 @@ a:hover {
   width: 100%;
   z-index: 100;
   background-color: #263238;
-  /* margin-top: -4rem; */
   height: 4rem;
 }
 
@@ -373,7 +393,12 @@ a:hover {
 
 #bio { 
   text-align: center;
-  width: 60%;
+  padding: 50px;
+  font-size: 1.4rem;
+}
+
+#bio p {
+  text-align: right;
 }
 
 #work-button {
