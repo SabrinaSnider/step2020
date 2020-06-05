@@ -105,7 +105,7 @@ a:hover {
 
 .section-content {
   padding: 20px;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
 }
 
@@ -120,11 +120,10 @@ a:hover {
 .section-header {
   color: #673ab7;
   padding: 10px;
-  margin: 50px auto;
+  margin: 50px auto 20px;
   font-size: 3rem;
   font-weight: bold;
   width: fit-content;
-  font-family: 'Inconsolata', monospace;
   position: relative;
 }
 
@@ -135,7 +134,7 @@ a:hover {
   height: 5px;
   border-top: 1px solid #673ab7;
   top: 50%;
-  width: 80%;
+  width: 50%;
 }
 
 .section-header span:before {
@@ -360,23 +359,21 @@ a:hover {
 }
 
 #selfie {
-  height: 25rem;
-  width: 25rem;
-  border-bottom: 5px solid #673ab7;
-  border-left: 5px solid #673ab7;
-  padding-bottom: 8px;
-  padding-left: 8px;
+  height: 35rem;
+  border-radius: 4px;
+  margin-bottom: -60px;
+}
+
+#selfie-container {
+  background-color: #584a78;
+  border-radius: 4px;
+  padding: 35px;
+  margin-bottom: 35px;
 }
 
 #bio { 
-  width: 50%; 
   text-align: center;
-  padding: 20px;
-}
-
-#skills { 
-  width: 50%; 
-  padding: 20px;
+  width: 60%;
 }
 
 #work-button {
