@@ -42,15 +42,15 @@ function toggleSort() {
 }
 
 /* Change navbar color after scrolling past the intro */
-function navbarColorScroll() {
-  var introSection = document.getElementById("intro");
-  var navbar = document.getElementById("navbar");
-  if (window.scrollY > (introSection.offsetTop + introSection.offsetHeight - navbar.offsetHeight)) {
-    navbar.style.backgroundColor = "#263238";
-  } else {
-    navbar.style.backgroundColor = "transparent";
-  }
-}
+// function navbarColorScroll() {
+//   var introSection = document.getElementById("intro");
+//   var navbar = document.getElementById("navbar");
+//   if (window.scrollY > (introSection.offsetTop + introSection.offsetHeight - navbar.offsetHeight)) {
+//     navbar.style.backgroundColor = "#263238";
+//   } else {
+//     navbar.style.backgroundColor = "transparent";
+//   }
+// }
 
 /* Deletes a single comment from the page and from datastore */
 function deleteComment(id) {

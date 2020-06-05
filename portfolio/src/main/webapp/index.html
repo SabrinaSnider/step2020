@@ -10,6 +10,29 @@
   </head>
   <body onload="getComments();" onscroll="navbarColorScroll()">
     <div id="content">
+      <section id="intro">
+        <div id="intro-content">
+          <div>
+            <div id="intro-text">
+              <h1 class="big-header-main">>Hi, my name is <span style="color: #9366e3; font-weight: bold;">Sabrina</span></h1>
+              <h1 class="sub-header-main">>I like to code</h1>
+              <div id="portfolio-button-container">
+                <a id="portfolio-button" class="white-button" href="#about-me-section"
+                  onmouseover="portfolioBtnHoverOn()"
+                  onmouseout="portfolioBtnHoverOff()"
+                >
+                  View my portfolio
+                  <img id="portfolio-arrow" src="static-files/images/icons/arrow.svg" >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="circle circle-small"><img id="circle-image-small" src="static-files/images/circle.svg"></div>
+        <div class="circle circle-large"><img id="circle-image-large" src="static-files/images/circle2.svg"></div>
+      </section>
+
       <div id="navbar" class="stick-to-top">
         <div id="nav-header">
           <a href="#intro"><h1 id="nav-name">Sabrina Snider</h1></a>
@@ -20,29 +43,6 @@
           <a id="resume-button" class="white-button" href="./static-files/sabrina_snider_resume.pdf" download>Resume</a>
         </div>
       </div>
-      
-      <section id="intro">
-        <div id="intro-content">
-          <div>
-            <div id="intro-text">
-              <h2 class="sub-header-main">Hello World</h2>
-              <h1 class="big-header-main">I'm <span style="color: #9366e3; font-weight: bold;">Sabrina</span> and I like to code</h1>
-              <a id="portfolio-button" class="white-button" href="#about-me-section"
-                onmouseover="portfolioBtnHoverOn()"
-                onmouseout="portfolioBtnHoverOff()"
-              >
-                View my portfolio
-                <img id="portfolio-arrow" src="static-files/images/icons/arrow.svg" >
-              </a>
-            </div>
-          </div>
-
-          <img id="programming-image" src="./static-files/images/programming.svg">
-        </div>
-
-        <div class="circle circle-small"><img id="circle-image-small" src="static-files/images/circle.svg"></div>
-        <div class="circle circle-large"><img id="circle-image-large" src="static-files/images/circle2.svg"></div>
-      </section>
 
       <div id="overlay">
         <div class="layer layer-1"></div>
@@ -50,9 +50,9 @@
         <div class="layer layer-3"></div>
       </div>
 
-      <section id="aboutme-section" class="white-background">
+      <section id="about-me-section" class="white-background">
         <h1 class="section-header"><span>My Skills</span></h1>
-        <div id="aboutme-content" class="section-content">
+        <div id="about-me-content" class="section-content">
           <div id="bio">
             <img id="selfie" src="./static-files/images/selfie-cropped.jpg">
             <p>

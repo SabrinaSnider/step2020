@@ -79,23 +79,25 @@ a:hover {
   margin: 0px 20px;
 }
 
-.stick-to-top {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
 .big-header-main {
   color: #ede7f6;
-  font-size: 3.5rem;
+  font-size: 7rem;
   margin: 0px;
   padding: 0px;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 .sub-header-main {
+  color: #9f8cb3;
+  font-size: 7rem;
+  margin: 0px;
+  padding: 0px;
+  font-weight: bold;
+}
+
+.mini-header-main {
   color: #b9b0c2;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin: 0px;
   padding: 0px;
   font-weight: normal;
@@ -150,7 +152,7 @@ a:hover {
   padding-top: 0px;
 }
 
-#aboutme-content {
+#about-me-content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -316,12 +318,15 @@ a:hover {
   justify-content: space-between;
   background-color: transparent;
   align-items: center;
-  padding: 20px;
   box-sizing: border-box;
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
+  padding: 20px;
+  width: 100%;
   z-index: 100;
+  background-color: #263238;
+  /* margin-top: -4rem; */
+  height: 4rem;
 }
 
 #nav-name {
@@ -334,6 +339,12 @@ a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+#portfolio-button-container { 
+  width: 100%; 
+  text-align: center;
+  padding: 10px;
 }
 
 #intro {
@@ -435,18 +446,18 @@ a:hover {
 }
 
 #circle-image-small {
-  height: 25rem;
-  width: 25rem;
+  height: 22rem;
+  width: 22rem;
 }
 
 .circle-large {
-  bottom: -12rem;
-  right: -12rem;
+  bottom: -16rem;
+  right: -16rem;
 }
 
 #circle-image-large {
-  height: 45rem;
-  width: 45rem;
+  height: 42rem;
+  width: 42rem;
 }
 
 #intro-content {
@@ -454,13 +465,13 @@ a:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  max-width: 1000px;
   z-index: 50;
 }
 
 #intro-text {
   padding: 0px 15px;
-  text-align: center;
+  text-align: left;
+  font-family: 'Inconsolata', monospace;
 }
 
 #overlay {
@@ -482,4 +493,9 @@ a:hover {
   height: 20px;
   vertical-align: middle;
   margin-left: 3px;
+}
+
+#portfolio-button {
+  font-size: 1.5rem;
+  border-width: 2px;
 }

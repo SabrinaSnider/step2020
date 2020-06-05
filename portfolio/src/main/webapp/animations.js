@@ -8,17 +8,17 @@ gsap.to('.circle', 20, { rotation:"360", ease: Linear.easeNone, repeat: -1 });
 
 gsap.fromTo('.circle-small', 
   { x: '10rem', opacity: 0 }, 
-  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 1.3 }
+  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 1.8 }
 );
 
 gsap.fromTo('.circle-large', 
   { x: '-10rem', opacity: 0 }, 
-  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 1.9 }
+  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 2.5 }
 );
 
-gsap.fromTo('#intro-content', 
-  { x: '30rem', opacity: 0 }, 
-  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 2.5 }
+gsap.fromTo('#intro-content', 2,
+  { opacity: 0 }, 
+  { x: '0', opacity: 1, ease:'back.out(1.7)', delay: 3.2 }
 );
 
 /* event handlers */
