@@ -16,6 +16,7 @@
 function createElementWithParams (tag, {
   className = "",
   innerText = "",
+
   onclick = undefined,
 } = {}) {
   const el = document.createElement(tag);
@@ -42,7 +43,6 @@ function toggleSort() {
 
 /* Deletes a single comment from the page and from datastore */
 function deleteComment(id) {
-  console.log("delete comment")
   fetch('/delete-comment?id=' + id, { method: "post" }).then(() => {
     window.location.reload();
   })
