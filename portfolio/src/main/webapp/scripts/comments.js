@@ -83,6 +83,20 @@ function getComments() {
   })
 }
 
+function submitComment() {
+  // send ajax request to store comment
+  var http = new XMLHttpRequest();
+  http.open("POST", "/add-comment", true);
+  http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+  const name = document.getElementById("comment-input-name").value;
+  const message = document.getElementById("comment-input-message").value;
+  http.send("name=" + name + "&message=" + message);
+
+  // refresh comments
+  getComments();
+}
+
 /* Creates an <li> element with comment information */
 function addComment(comment) {
   const commentItem = createElementWithParams("li", {className: "comment"})

@@ -21,6 +21,8 @@ public class AddCommentServlet extends HttpServlet {
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
 
+    System.out.println("Adding comment " + name + " " + message);
+
     Entity newComment = new Entity("Comment");
 
     newComment.setProperty("name", name);
@@ -29,6 +31,6 @@ public class AddCommentServlet extends HttpServlet {
 
     DatastoreServiceFactory.getDatastoreService().put(newComment);
 
-    response.sendRedirect("/#comment-form");
+    // response.sendRedirect("/#comment-form");
   }
 }
