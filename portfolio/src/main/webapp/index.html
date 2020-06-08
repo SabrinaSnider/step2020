@@ -131,7 +131,7 @@
               <label for="comment-sort">Sort by</label>
               <select id="comment-sort-select" name="comment-sort" selected="timestamp" onchange="getComments();">
                 <option value="timestamp">Time</option>
-                <option value="name">Name</option>
+                <option value="email">Email</option>
               </select>
               <img id="sort-icon" class="sort-down" onclick="toggleSort();">
             </div>
@@ -148,7 +148,7 @@
           </div>
 
           <form id="comment-form" method="POST" onsubmit="submitComment(); return false;">
-            <input id="comment-input-name" type="text" name="name" placeholder="Name">
+            <input id="comment-input-email" type="text" name="email" placeholder="Email">
             <textarea id="comment-input-message" type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
             <input id="comment-submit-btn" type="submit" class="purple-button" id="Submit">
           </form>

@@ -17,13 +17,13 @@ public class AddCommentServlet extends HttpServlet {
   /* Adds the request comment to the datastore */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String name = request.getParameter("name");
+    String email = request.getParameter("email");
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
 
     Entity newComment = new Entity("Comment");
 
-    newComment.setProperty("name", name);
+    newComment.setProperty("email", email);
     newComment.setProperty("timestamp", timestamp);
     newComment.setProperty("message", message);
 

@@ -16,7 +16,6 @@
 function createElementWithParams (tag, {
   className = "",
   innerText = "",
-
   onclick = undefined,
 } = {}) {
   const el = document.createElement(tag);
@@ -89,9 +88,9 @@ function submitComment() {
   http.open("POST", "/add-comment", true);
   http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 
-  const name = document.getElementById("comment-input-name").value;
+  const email = document.getElementById("comment-input-email").value;
   const message = document.getElementById("comment-input-message").value;
-  http.send("name=" + name + "&message=" + message);
+  http.send("email=" + email + "&message=" + message);
 
   // refresh comments after post request completes
   http.onload = () => getComments();
@@ -102,9 +101,9 @@ function addComment(comment) {
   const commentItem = createElementWithParams("li", {className: "comment"})
   const commentHeader = createElementWithParams("div", {className: "comment-header"})
 
-  const commentName = createElementWithParams("p", { 
-    className: "comment-name", 
-    innerText: comment.name,
+  const commentEmail = createElementWithParams("p", { 
+    className: "comment-email", 
+    innerText: comment.email,
   })
 
   const commentMessage = createElementWithParams("p", { 
@@ -118,7 +117,7 @@ function addComment(comment) {
   }) 
 
   commentItem.appendChild(commentHeader);
-  commentHeader.appendChild(commentName);
+  commentHeader.appendChild(commentEmail);
   commentHeader.appendChild(commentDelete);
   commentItem.appendChild(commentMessage);
   
