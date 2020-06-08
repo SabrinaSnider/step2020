@@ -85,7 +85,7 @@ function getComments() {
 
 function submitComment() {
   // send ajax request to store comment
-  var http = new XMLHttpRequest();
+  const http = new XMLHttpRequest();
   http.open("POST", "/add-comment", true);
   http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 
@@ -93,8 +93,8 @@ function submitComment() {
   const message = document.getElementById("comment-input-message").value;
   http.send("name=" + name + "&message=" + message);
 
-  // refresh comments
-  getComments();
+  // refresh comments after post request completes
+  http.onload = () => getComments();
 }
 
 /* Creates an <li> element with comment information */
