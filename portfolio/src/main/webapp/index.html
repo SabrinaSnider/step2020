@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./scripts/comments.js"></script>
   </head>
-  <body onload="getComments();">
+  <body onload="init();">
     <div id="content">
       <section id="intro">
         <div id="intro-content">
@@ -37,7 +37,7 @@
         <div id="nav-links">
           <a href="#about-me-section" class="nav-item">About Me</a>
           <a href="#work-section"  class="nav-item">Work</a>
-          <a href="login.html" class="nav-item">Login</a>
+          <a id="auth-link" href="/login" class="nav-item"></a>
           <a id="resume-button" class="white-button" href="./static-files/sabrina_snider_resume.pdf" download>Resume</a>
         </div>
       </div>
@@ -127,6 +127,16 @@
       <section id="comment-section" class="white-background">
         <h1 class="section-header">Comments</h1>
         <div id="comment-content" class="section-content">
+          <form id="comment-form" method="POST" onsubmit="submitComment(); return false;">
+            <input id="comment-input-email" type="text" name="email" placeholder="Email">
+            <textarea id="comment-input-message" type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
+            <input id="comment-submit-btn" type="submit" class="purple-button" id="Submit">
+          </form>
+
+          <div id="comment-blocker">
+            Log in to leave a comment
+          </div>
+
           <div id="comment-options">
             <div>
               <label for="comment-sort">Sort by</label>
@@ -148,11 +158,7 @@
             </div>
           </div>
 
-          <form id="comment-form" method="POST" onsubmit="submitComment(); return false;">
-            <input id="comment-input-email" type="text" name="email" placeholder="Email">
-            <textarea id="comment-input-message" type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
-            <input id="comment-submit-btn" type="submit" class="purple-button" id="Submit">
-          </form>
+          
 
           <ul id="comment-list"></ul>
 

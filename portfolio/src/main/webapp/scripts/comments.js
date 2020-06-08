@@ -12,6 +12,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* Function called on page load to show comments and check if the user can comment */
+function init() {
+  if (isLoggedIn()) {
+    // toggle comment form
+    document.getElementById("comment-form").style.display = "flex";
+    document.getElementById("comment-block").style.display = "none";
+  }
+  setAuthURL();
+  getComments();
+}
+
+/* Check that the user is logged in */
+function isLoggedIn() {
+  fetch('/user', { method: "get" }).then(response => response.json()).then(data => {
+    if (data.error) {
+      console.log(data.error);
+      return undefined;
+    } else {
+      return data.email;
+    }
+  })
+}
+
+/* Set the Login/Logout text and link based on whether the current user is logged in */
+function setAuthURL() {
+  const authLink = document.getElementById("auth-link");
+  fetch('/auth-url', { method: "get" }).then(response => response.json()).then(data => {
+    if (data.login) {
+      authLink.innerText = "Login";
+      authLink.href = data.login;
+    } else {
+      authLink.innerText = "Logout"
+      authLink.href = data.logout;
+    }
+  })
+}
+
 /* Create a new HTML element */
 function createElementWithParams (tag, {
   className = "",
@@ -83,13 +120,17 @@ function getComments() {
 }
 
 function submitComment() {
+  // get current user
+  const email = isLoggedIn();
+  if (email === undefined) return;
+
+  // get message text
+  const message = document.getElementById("comment-input-message").value;
+
   // send ajax request to store comment
   var http = new XMLHttpRequest();
   http.open("POST", "/add-comment", true);
   http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-
-  const email = document.getElementById("comment-input-email").value;
-  const message = document.getElementById("comment-input-message").value;
   http.send("email=" + email + "&message=" + message);
 
   // refresh comments after post request completes

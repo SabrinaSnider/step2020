@@ -68,6 +68,7 @@ public class ListCommentsServlet extends HttpServlet {
     }
 
     response.setContentType("application/json;");
+    System.out.println(convertToJson(comments));
     response.getWriter().println(convertToJson(comments));
   }
 }
