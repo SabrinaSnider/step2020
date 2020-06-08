@@ -93,8 +93,8 @@ function submitComment() {
   const message = document.getElementById("comment-input-message").value;
   http.send("name=" + name + "&message=" + message);
 
-  // refresh comments
-  getComments();
+  // refresh comments after post request completes
+  http.onload = () => getComments();
 }
 
 /* Creates an <li> element with comment information */
