@@ -43,19 +43,16 @@ function toggleSort() {
 
 /* Deletes a single comment from the page and from datastore */
 function deleteComment(id) {
-  fetch('/delete-comment?id=' + id, { method: "post" }).then(() => {
-    window.location.reload();
-  })
+  fetch('/delete-comment?id=' + id, { method: "post" })
 }
 
 /* Deletes all of the comments from the page and from datastore */
 function deleteAllComments() {
-  fetch('/delete-all-comments', { method: "post" }).then(() => {
-    window.location.reload();
-  })
+  fetch('/delete-all-comments', { method: "post" });
+  document.getElementById("comment-list").innerHTML = "";
 }
 
-/* Toggle on the delete all button if comments exist */
+/* Toggle on the delete all button; used to only show delete all if comements exist */
 function toggleDeleteAllButton(show) {
   const deleteAllButton = document.getElementById("delete-all-button");
   deleteAllButton.style.display = show ? "block" : "none";
@@ -88,8 +85,8 @@ function getComments() {
 
 /* Creates an <li> element with comment information */
 function addComment(comment) {
-  const commentItem = createElementWithParams("li", { className: "comment" })
-  const commentHeader = createElementWithParams("div", { className: "comment-header" })
+  const commentItem = createElementWithParams("li", {className: "comment"})
+  const commentHeader = createElementWithParams("div", {className: "comment-header"})
 
   const commentName = createElementWithParams("p", { 
     className: "comment-name", 
@@ -103,7 +100,7 @@ function addComment(comment) {
 
   const commentDelete = createElementWithParams("img", { 
     className: "comment-delete", 
-    onclick: () => deleteComment(comment.id),
+    onclick: () => {deleteComment(comment.id); commentItem.remove();},
   }) 
 
   commentItem.appendChild(commentHeader);
