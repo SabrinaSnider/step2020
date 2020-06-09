@@ -17,7 +17,7 @@ async function init() {
   setLoginLogoutURL();
   getComments();
 
-  isLoggedIn().then(email => { // block comment form if not logged in
+  getUserEmail().then(email => { // allow user to comment if logged in
     console.log(email)
     if (email) {
       document.getElementById("comment-form").style.display = "flex";
@@ -27,7 +27,7 @@ async function init() {
 }
 
 /* Helper function to check if the user is logged in */
-async function isLoggedIn() {
+async function getUserEmail() {
   return fetch('/user', { method: "get" }).then(response => response.json()).then(data => {
     if (data.error) {
       console.log(data.error);
@@ -39,7 +39,7 @@ async function isLoggedIn() {
   })
 }
 
-/* Set the Login/Logout text and URL */
+/* Set the Login/Logout text and URL in the navbar */
 function setLoginLogoutURL() {
   const authLink = document.getElementById("auth-link");
   fetch('/auth-url', { method: "get" }).then(response => response.json()).then(data => {
@@ -53,7 +53,7 @@ function setLoginLogoutURL() {
   })
 }
 
-/* Create a new HTML element */
+/* Creates a new HTML element */
 function createElementWithParams (tag, {
   className = "",
   innerText = "",
@@ -120,11 +120,7 @@ function getComments() {
 }
 
 /* Adds a comment to datastore and prompt a reload of comments */
-function submitComment() {
-  // get current user
-  const email = isLoggedIn();
-  if (email === undefined) return;
-
+async function submitComment() {
   // get message text
   const message = document.getElementById("comment-input-message").value;
 
@@ -132,7 +128,7 @@ function submitComment() {
   var http = new XMLHttpRequest();
   http.open("POST", "/add-comment", true);
   http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  http.send("email=" + email + "&message=" + message);
+  http.send("message=" + message);
 
   // refresh comments after post request completes
   http.onload = () => getComments();
