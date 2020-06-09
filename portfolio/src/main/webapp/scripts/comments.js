@@ -127,15 +127,24 @@ function addComment(comment) {
     innerText: comment.message,
   })
 
+  commentItem.appendChild(commentHeader);
+  commentHeader.appendChild(commentEmail);
+  commentItem.appendChild(commentMessage);
+  
+
   const commentDelete = createElementWithParams("img", { 
     className: "comment-delete", 
     onclick: () => {deleteComment(comment.id); commentItem.remove();},
   }) 
 
-  commentItem.appendChild(commentHeader);
-  commentHeader.appendChild(commentEmail);
-  commentHeader.appendChild(commentDelete);
-  commentItem.appendChild(commentMessage);
-  
+  // only let the user delete the comment if its their comment or if theyre and admin
+  isAdmin().then(isAdmin => {
+    getUserEmail().then(currentUserEmail => {
+      if (isAdmin === "true" || currentUserEmail === comment.email) {
+        commentHeader.appendChild(commentDelete);
+      }
+    })
+  })
+
   return commentItem;
 }
