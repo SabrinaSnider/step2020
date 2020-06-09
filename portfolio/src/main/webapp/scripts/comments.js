@@ -13,30 +13,34 @@
 // limitations under the License.
 
 /* Function called on page load to show comments and check if the user can comment */
-function init() {
-  if (isLoggedIn()) {
-    // toggle comment form
-    document.getElementById("comment-form").style.display = "flex";
-    document.getElementById("comment-block").style.display = "none";
-  }
-  setAuthURL();
+async function init() {
+  setLoginLogoutURL();
   getComments();
+
+  isLoggedIn().then(email => { // block comment form if not logged in
+    console.log(email)
+    if (email) {
+      document.getElementById("comment-form").style.display = "flex";
+      document.getElementById("comment-blocker").style.display = "none";
+    }
+  })
 }
 
-/* Check that the user is logged in */
-function isLoggedIn() {
-  fetch('/user', { method: "get" }).then(response => response.json()).then(data => {
+/* Helper function to check if the user is logged in */
+async function isLoggedIn() {
+  return fetch('/user', { method: "get" }).then(response => response.json()).then(data => {
     if (data.error) {
       console.log(data.error);
       return undefined;
     } else {
+      console.log("returning", data.email)
       return data.email;
     }
   })
 }
 
-/* Set the Login/Logout text and link based on whether the current user is logged in */
-function setAuthURL() {
+/* Set the Login/Logout text and URL */
+function setLoginLogoutURL() {
   const authLink = document.getElementById("auth-link");
   fetch('/auth-url', { method: "get" }).then(response => response.json()).then(data => {
     if (data.login) {
@@ -88,12 +92,6 @@ function deleteAllComments() {
   document.getElementById("comment-list").innerHTML = "";
 }
 
-/* Toggle on the delete all button; used to only show delete all if comements exist */
-function toggleDeleteAllButton(show) {
-  const deleteAllButton = document.getElementById("delete-all-button");
-  deleteAllButton.style.display = show ? "block" : "none";
-}
-
 /* Fetches comment data from /comment-list and displays them */
 function getComments() {
   const container = document.getElementById("comment-list");
@@ -115,10 +113,13 @@ function getComments() {
         addComment(comment)
       );
     });
-    Object.keys(data).length > 0 ? toggleDeleteAllButton(true) : toggleDeleteAllButton(false);
+    // show "delete all" button if comments are present
+    const deleteAllButton = document.getElementById("delete-all-button");
+    deleteAllButton.style.display = Object.keys(data).length > 0 ? "block" : "none";
   })
 }
 
+/* Adds a comment to datastore and prompt a reload of comments */
 function submitComment() {
   // get current user
   const email = isLoggedIn();

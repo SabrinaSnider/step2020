@@ -22,9 +22,9 @@ public class GetUserServlet extends HttpServlet {
 
     if (userService.isUserLoggedIn()) {
       String email = userService.getCurrentUser().getEmail();
-      response.getWriter().println("{user: " + email + "}");
+      response.getWriter().println("{\"email\": \"" + email + "\"}");
     } else {
-      response.getWriter().println("{error: 'User not logged in' }");
+      response.getWriter().println("{\"error\": \"User not logged in\"}");
     }
   }
 }

@@ -27,7 +27,6 @@ public class AuthenticationURLServlet extends HttpServlet {
       response.getWriter().println("{\"logout\": \"" + logoutURL + "\"}");
     } else {
       String loginURL = userService.createLoginURL("/");
-      System.out.println("Login url:" + loginURL);
       response.getWriter().println("{\"login\": \"" + loginURL + "\"}");
     }
   }
