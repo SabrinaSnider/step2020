@@ -464,7 +464,7 @@ a:hover {
   margin: 0px;
 }
 
-.comment-name {
+.comment-email {
   font-weight: bold;
   padding: 0px;
   margin: 0px 0px 10px 0px;
@@ -502,10 +502,15 @@ a:hover {
 }
 
 #comment-form {
-  display: flex;
+  display: none;
   flex-direction: column;
   text-align: left;
   flex-grow: 1;
+}
+
+#comment-blocker {
+  padding: 30px 0;
+  font-weight: bold;
 }
 
 #comment-submit-btn {

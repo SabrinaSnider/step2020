@@ -12,11 +12,51 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* Create a new HTML element */
+/* Function called on page load to show comments and check if the user can comment */
+async function init() {
+  setLoginLogoutURL();
+  getComments();
+
+  getUserEmail().then(email => { // allow user to comment if logged in
+    console.log(email)
+    if (email) {
+      document.getElementById("comment-form").style.display = "flex";
+      document.getElementById("comment-blocker").style.display = "none";
+    }
+  })
+}
+
+/* Helper function to check if the user is logged in */
+async function getUserEmail() {
+  return fetch('/user', { method: "get" }).then(response => response.json()).then(data => {
+    if (data.error) {
+      console.log(data.error);
+      return undefined;
+    } else {
+      console.log("returning", data.email)
+      return data.email;
+    }
+  })
+}
+
+/* Set the Login/Logout text and URL in the navbar */
+function setLoginLogoutURL() {
+  const authLink = document.getElementById("auth-link");
+  fetch('/auth-url', { method: "get" }).then(response => response.json()).then(data => {
+    if (data.login) {
+      authLink.innerText = "Login";
+      authLink.href = data.login;
+    } else {
+      authLink.innerText = "Logout"
+      authLink.href = data.logout;
+    }
+  })
+}
+
+/* Creates a new HTML element */
 function createElementWithParams (tag, {
   className = "",
   innerText = "",
-
   onclick = undefined,
 } = {}) {
   const el = document.createElement(tag);
@@ -52,12 +92,6 @@ function deleteAllComments() {
   document.getElementById("comment-list").innerHTML = "";
 }
 
-/* Toggle on the delete all button; used to only show delete all if comements exist */
-function toggleDeleteAllButton(show) {
-  const deleteAllButton = document.getElementById("delete-all-button");
-  deleteAllButton.style.display = show ? "block" : "none";
-}
-
 /* Fetches comment data from /comment-list and displays them */
 function getComments() {
   const container = document.getElementById("comment-list");
@@ -79,20 +113,23 @@ function getComments() {
         addComment(comment)
       );
     });
-    Object.keys(data).length > 0 ? toggleDeleteAllButton(true) : toggleDeleteAllButton(false);
+    // show "delete all" button if comments are present
+    const deleteAllButton = document.getElementById("delete-all-button");
+    deleteAllButton.style.display = Object.keys(data).length > 0 ? "block" : "none";
   })
 }
 
-function submitComment() {
+/* Adds a comment to datastore and prompt a reload of comments */
+async function submitComment() {
+  // get message text
+  const message = document.getElementById("comment-input-message").value;
+
   // send ajax request to store comment
   const http = new XMLHttpRequest();
   http.open("POST", "/add-comment", true);
   http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-
-  const name = document.getElementById("comment-input-name").value;
-  const message = document.getElementById("comment-input-message").value;
-  http.send("name=" + name + "&message=" + message);
-
+  http.send("message=" + message);
+  
   // refresh comments after post request completes
   http.onload = () => getComments();
 }
@@ -102,9 +139,9 @@ function addComment(comment) {
   const commentItem = createElementWithParams("li", {className: "comment"})
   const commentHeader = createElementWithParams("div", {className: "comment-header"})
 
-  const commentName = createElementWithParams("p", { 
-    className: "comment-name", 
-    innerText: comment.name,
+  const commentEmail = createElementWithParams("p", { 
+    className: "comment-email", 
+    innerText: comment.email,
   })
 
   const commentMessage = createElementWithParams("p", { 
@@ -118,7 +155,7 @@ function addComment(comment) {
   }) 
 
   commentItem.appendChild(commentHeader);
-  commentHeader.appendChild(commentName);
+  commentHeader.appendChild(commentEmail);
   commentHeader.appendChild(commentDelete);
   commentItem.appendChild(commentMessage);
   

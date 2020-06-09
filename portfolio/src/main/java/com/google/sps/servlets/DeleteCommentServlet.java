@@ -25,11 +25,7 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
-import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.FilterOperator;
 
 /* Servlet that adds a comment to the dataserve. */
 @WebServlet("/delete-comment")
@@ -44,9 +40,8 @@ public class DeleteCommentServlet extends HttpServlet {
     try {
       Entity comment = datastore.get(KeyFactory.createKey("Comment", id));
       datastore.delete(comment.getKey());
-      response.sendRedirect("/#comment-form");
     } catch (EntityNotFoundException e) {
-      response.sendRedirect("/#comment-form");
+      return;
     }
   }
 }
