@@ -147,9 +147,9 @@
             </div>
           </div>
 
-          <form id="comment-form" action="/add-comment" method="POST">
-            <input type="text" name="name" placeholder="Name">
-            <textarea type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
+          <form id="comment-form" method="POST" onsubmit="submitComment(); return false;">
+            <input id="comment-input-name" type="text" name="name" placeholder="Name">
+            <textarea id="comment-input-message" type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
             <input id="comment-submit-btn" type="submit" class="purple-button" id="Submit">
           </form>
 

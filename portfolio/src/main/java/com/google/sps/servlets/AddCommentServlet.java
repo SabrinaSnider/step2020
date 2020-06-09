@@ -28,7 +28,5 @@ public class AddCommentServlet extends HttpServlet {
     newComment.setProperty("message", message);
 
     DatastoreServiceFactory.getDatastoreService().put(newComment);
-
-    response.sendRedirect("/#comment-form");
   }
 }
