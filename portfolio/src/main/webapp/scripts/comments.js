@@ -15,14 +15,7 @@
 /* Function called on page load to show comments and check if the user can comment */
 async function init() {
   setLoginLogoutURL();
-  getComments();
-
-  getUserEmail().then(email => { // allow user to comment if logged in
-    if (email) {
-      document.getElementById("comment-form").style.display = "flex";
-      document.getElementById("comment-blocker").style.display = "none";
-    }
-  })
+  displayComments();
 }
 
 /* Creates a new HTML element */
@@ -50,15 +43,7 @@ function toggleSort() {
     sortDirectionIcon.classList.remove('sort-up');
     sortDirectionIcon.classList.add('sort-down');
   }
-  getComments();
-}
-
-/* Function to show or hide the delete all button depending on whether the user is an admin */
-function showDeleteAllButton() {
-  const deleteAllButton = document.getElementById("delete-all-button");
-  isAdmin().then(isAdmin => {
-    deleteAllButton.style.display = isAdmin === "true" ? "block" : "none";
-  })
+  displayComments();
 }
 
 /* Deletes all of the comments from the page and from datastore */
@@ -72,10 +57,8 @@ function deleteComment(id) {
   fetch('/delete-comment?id=' + id, { method: "post" })
 }
 
-/* Fetches comment data from /comment-list and displays them */
+/* Fetches the comments from /comment-list with the user-selected sorting options */
 function getComments() {
-  const container = document.getElementById("comment-list");
-
   const sortSelector = document.getElementById('comment-sort-select');
   const maxSelector = document.getElementById('comment-max-select');
   const sortDirectionIcon = document.getElementById("sort-icon");
@@ -85,16 +68,37 @@ function getComments() {
   const ascending = sortDirectionIcon.classList.contains("sort-up") ? "true" : "false";
 
   const query = `?sort=${sort}&max=${max}&ascending=${ascending}`;
+  return fetch('/list-comments' + query).then(response => {return response.json();})
+}
 
+/* Reloads and displays all comments */
+async function displayComments() {
+  const userData = await getUserData();
+  const isAdmin = userData.admin;
+  const currentUserEmail = userData.email;
+
+  const comments = await getComments();
+
+  // Only display the comment form if the user is logged in
+  if (currentUserEmail) {
+    document.getElementById("comment-form").style.display = "flex";
+    document.getElementById("comment-blocker").style.display = "none";
+  }
+
+  const container = document.getElementById("comment-list");
   container.innerHTML = "";
-  fetch('/list-comments' + query).then(response => response.json()).then(data => {
-    data.forEach(comment => {
-      container.appendChild(
-        addComment(comment)
-      );
-    });
-    showDeleteAllButton();
-  })
+
+  comments.forEach(comment => {
+    container.appendChild(
+      addComment(comment, isAdmin, currentUserEmail)
+    );
+  });
+  
+  // show the delete all button if the user is an admin
+  if (isAdmin) {
+    const deleteAllButton = document.getElementById("delete-all-button");
+    deleteAllButton.style.display = isAdmin ? "block" : "none";
+  }
 }
 
 /* Adds a comment to datastore and prompt a reload of comments */
@@ -109,11 +113,12 @@ async function submitComment() {
   http.send("message=" + message);
 
   // refresh comments after post request completes
-  http.onload = () => getComments();
+  http.onload = () => displayComments();
 }
 
 /* Creates an <li> element with comment information */
-function addComment(comment) {
+function addComment(comment, isAdmin, currentUserEmail) {
+  console.log("comment stuff", isAdmin, currentUserEmail)
   const commentItem = createElementWithParams("li", {className: "comment"})
   const commentHeader = createElementWithParams("div", {className: "comment-header"})
 
@@ -127,24 +132,18 @@ function addComment(comment) {
     innerText: comment.message,
   })
 
-  commentItem.appendChild(commentHeader);
-  commentHeader.appendChild(commentEmail);
-  commentItem.appendChild(commentMessage);
-  
-
   const commentDelete = createElementWithParams("img", { 
     className: "comment-delete", 
     onclick: () => {deleteComment(comment.id); commentItem.remove();},
   }) 
 
+  commentItem.appendChild(commentHeader);
+  commentHeader.appendChild(commentEmail);
+  commentItem.appendChild(commentMessage);
+
   // only let the user delete the comment if its their comment or if theyre and admin
-  isAdmin().then(isAdmin => {
-    getUserEmail().then(currentUserEmail => {
-      if (isAdmin === "true" || currentUserEmail === comment.email) {
-        commentHeader.appendChild(commentDelete);
-      }
-    })
-  })
+  console.log(currentUserEmail === comment.email)
+  if (isAdmin || currentUserEmail === comment.email) commentHeader.appendChild(commentDelete);
 
   return commentItem;
 }
