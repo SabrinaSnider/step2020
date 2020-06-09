@@ -11,20 +11,19 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.JsonObject;
 
-@WebServlet("/user")
-public class GetUserServlet extends HttpServlet {
+@WebServlet("/is-admin")
+public class IsAdminServlet extends HttpServlet {
   
-  /* Validates that the user is logged in and gets their email */
+  /* Check whether or not the user had admin permissions */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     JsonObject json = new JsonObject();
 
-    if (userService.isUserLoggedIn()) {
-      String email = userService.getCurrentUser().getEmail();
-      json.addProperty("email", email);
+    if (userService.isUserAdmin()) {
+      json.addProperty("admin", "true");
     } else {
-      json.addProperty("error", "User not logged in");
+      json.addProperty("admin", "true");
     }
     response.setContentType("application/json;");
     response.getWriter().println(json);

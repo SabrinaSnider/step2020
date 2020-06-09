@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.JsonObject;
 
 @WebServlet("/auth-url")
 public class AuthenticationURLServlet extends HttpServlet {
@@ -17,14 +18,16 @@ public class AuthenticationURLServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
-    response.setContentType("application/json;");
+    JsonObject json = new JsonObject();
 
     if (userService.isUserLoggedIn()) {
       String logoutURL = userService.createLogoutURL("/");
-      response.getWriter().println("{\"logout\": \"" + logoutURL + "\"}");
+      json.addProperty("logout", logoutURL);
     } else {
       String loginURL = userService.createLoginURL("/");
-      response.getWriter().println("{\"login\": \"" + loginURL + "\"}");
+      json.addProperty("login", loginURL);
     }
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
   }
 }
