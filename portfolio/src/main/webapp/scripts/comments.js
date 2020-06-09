@@ -53,15 +53,23 @@ function toggleSort() {
   getComments();
 }
 
-/* Deletes a single comment from the page and from datastore */
-function deleteComment(id) {
-  fetch('/delete-comment?id=' + id, { method: "post" })
+/* Function to show or hide the delete all button depending on whether the user is an admin */
+function showDeleteAllButton() {
+  const deleteAllButton = document.getElementById("delete-all-button");
+  isAdmin().then(isAdmin => {
+    deleteAllButton.style.display = isAdmin === "true" ? "block" : "none";
+  })
 }
 
 /* Deletes all of the comments from the page and from datastore */
 function deleteAllComments() {
   fetch('/delete-all-comments', { method: "post" });
   document.getElementById("comment-list").innerHTML = "";
+}
+
+/* Deletes a single comment from the page and from datastore */
+function deleteComment(id) {
+  fetch('/delete-comment?id=' + id, { method: "post" })
 }
 
 /* Fetches comment data from /comment-list and displays them */
@@ -85,9 +93,7 @@ function getComments() {
         addComment(comment)
       );
     });
-    // show "delete all" button if comments are present
-    const deleteAllButton = document.getElementById("delete-all-button");
-    deleteAllButton.style.display = Object.keys(data).length > 0 ? "block" : "none";
+    showDeleteAllButton();
   })
 }
 

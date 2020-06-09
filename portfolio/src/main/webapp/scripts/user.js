@@ -10,6 +10,13 @@ async function getUserEmail() {
   })
 }
 
+/* Helper function to check if the user is an admin */
+async function isAdmin() {
+  return fetch('/is-admin', { method: "get" }).then(response => response.json()).then(data => {
+    return data.admin;
+  })
+}
+
 /* Set the Login/Logout text and URL in the navbar */
 function setLoginLogoutURL() {
   const authLink = document.getElementById("auth-link");

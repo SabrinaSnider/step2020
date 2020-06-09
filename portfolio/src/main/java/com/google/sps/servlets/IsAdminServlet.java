@@ -20,10 +20,10 @@ public class IsAdminServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     JsonObject json = new JsonObject();
 
-    if (userService.isUserAdmin()) {
+    if (userService.isUserLoggedIn() && userService.isUserAdmin()) {
       json.addProperty("admin", "true");
     } else {
-      json.addProperty("admin", "true");
+      json.addProperty("admin", "false");
     }
     response.setContentType("application/json;");
     response.getWriter().println(json);
