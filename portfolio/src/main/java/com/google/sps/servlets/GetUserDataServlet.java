@@ -9,22 +9,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.JsonObject;
 
-@WebServlet("/auth-url")
-public class AuthenticationURLServlet extends HttpServlet {
+@WebServlet("/user-data")
+public class GetUserDataServlet extends HttpServlet {
   
-  /* Returns a login or logout link depending on whether the user is logged in */
+  /* Validates that the user is logged in and gets their email */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
-    response.setContentType("application/json;");
+    JsonObject json = new JsonObject();
 
     if (userService.isUserLoggedIn()) {
-      String logoutURL = userService.createLogoutURL("/");
-      response.getWriter().println("{\"logout\": \"" + logoutURL + "\"}");
+      String email = userService.getCurrentUser().getEmail();
+      json.addProperty("email", email);
+
+      json.addProperty("admin", userService.isUserAdmin() ? "true" : "false");
     } else {
-      String loginURL = userService.createLoginURL("/");
-      response.getWriter().println("{\"login\": \"" + loginURL + "\"}");
+      json.addProperty("error", "User not logged in");
+      json.addProperty("admin", "false");
     }
+
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
   }
 }

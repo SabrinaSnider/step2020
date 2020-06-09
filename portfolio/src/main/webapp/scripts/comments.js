@@ -15,42 +15,7 @@
 /* Function called on page load to show comments and check if the user can comment */
 async function init() {
   setLoginLogoutURL();
-  getComments();
-
-  getUserEmail().then(email => { // allow user to comment if logged in
-    console.log(email)
-    if (email) {
-      document.getElementById("comment-form").style.display = "flex";
-      document.getElementById("comment-blocker").style.display = "none";
-    }
-  })
-}
-
-/* Helper function to check if the user is logged in */
-async function getUserEmail() {
-  return fetch('/user', { method: "get" }).then(response => response.json()).then(data => {
-    if (data.error) {
-      console.log(data.error);
-      return undefined;
-    } else {
-      console.log("returning", data.email)
-      return data.email;
-    }
-  })
-}
-
-/* Set the Login/Logout text and URL in the navbar */
-function setLoginLogoutURL() {
-  const authLink = document.getElementById("auth-link");
-  fetch('/auth-url', { method: "get" }).then(response => response.json()).then(data => {
-    if (data.login) {
-      authLink.innerText = "Login";
-      authLink.href = data.login;
-    } else {
-      authLink.innerText = "Logout"
-      authLink.href = data.logout;
-    }
-  })
+  displayComments();
 }
 
 /* Creates a new HTML element */
@@ -78,12 +43,7 @@ function toggleSort() {
     sortDirectionIcon.classList.remove('sort-up');
     sortDirectionIcon.classList.add('sort-down');
   }
-  getComments();
-}
-
-/* Deletes a single comment from the page and from datastore */
-function deleteComment(id) {
-  fetch('/delete-comment?id=' + id, { method: "post" })
+  displayComments();
 }
 
 /* Deletes all of the comments from the page and from datastore */
@@ -92,10 +52,13 @@ function deleteAllComments() {
   document.getElementById("comment-list").innerHTML = "";
 }
 
-/* Fetches comment data from /comment-list and displays them */
-function getComments() {
-  const container = document.getElementById("comment-list");
+/* Deletes a single comment from the page and from datastore */
+function deleteComment(id) {
+  fetch('/delete-comment?id=' + id, { method: "post" })
+}
 
+/* Fetches the comments from /comment-list with the user-selected sorting options */
+function getComments() {
   const sortSelector = document.getElementById('comment-sort-select');
   const maxSelector = document.getElementById('comment-max-select');
   const sortDirectionIcon = document.getElementById("sort-icon");
@@ -105,18 +68,37 @@ function getComments() {
   const ascending = sortDirectionIcon.classList.contains("sort-up") ? "true" : "false";
 
   const query = `?sort=${sort}&max=${max}&ascending=${ascending}`;
+  return fetch('/list-comments' + query).then(response => {return response.json();})
+}
 
+/* Reloads and displays all comments */
+async function displayComments() {
+  const userData = await getUserData();
+  const isAdmin = userData.admin;
+  const currentUserEmail = userData.email;
+
+  const comments = await getComments();
+
+  // Only display the comment form if the user is logged in
+  if (currentUserEmail) {
+    document.getElementById("comment-form").style.display = "flex";
+    document.getElementById("comment-blocker").style.display = "none";
+  }
+
+  const container = document.getElementById("comment-list");
   container.innerHTML = "";
-  fetch('/list-comments' + query).then(response => response.json()).then(data => {
-    data.forEach(comment => {
-      container.appendChild(
-        addComment(comment)
-      );
-    });
-    // show "delete all" button if comments are present
+
+  comments.forEach(comment => {
+    container.appendChild(
+      addComment(comment, isAdmin, currentUserEmail)
+    );
+  });
+  
+  // show the delete all button if the user is an admin
+  if (isAdmin) {
     const deleteAllButton = document.getElementById("delete-all-button");
-    deleteAllButton.style.display = Object.keys(data).length > 0 ? "block" : "none";
-  })
+    deleteAllButton.style.display = isAdmin ? "block" : "none";
+  }
 }
 
 /* Adds a comment to datastore and prompt a reload of comments */
@@ -131,11 +113,12 @@ async function submitComment() {
   http.send("message=" + message);
   
   // refresh comments after post request completes
-  http.onload = () => getComments();
+  http.onload = () => displayComments();
 }
 
 /* Creates an <li> element with comment information */
-function addComment(comment) {
+function addComment(comment, isAdmin, currentUserEmail) {
+  console.log("comment stuff", isAdmin, currentUserEmail)
   const commentItem = createElementWithParams("li", {className: "comment"})
   const commentHeader = createElementWithParams("div", {className: "comment-header"})
 
@@ -156,8 +139,11 @@ function addComment(comment) {
 
   commentItem.appendChild(commentHeader);
   commentHeader.appendChild(commentEmail);
-  commentHeader.appendChild(commentDelete);
   commentItem.appendChild(commentMessage);
-  
+
+  // only let the user delete the comment if its their comment or if theyre and admin
+  console.log(currentUserEmail === comment.email)
+  if (isAdmin || currentUserEmail === comment.email) commentHeader.appendChild(commentDelete);
+
   return commentItem;
 }

@@ -9,21 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.JsonObject;
 
-@WebServlet("/user")
-public class GetUserServlet extends HttpServlet {
+@WebServlet("/login-logout-url")
+public class LoginLogoutURLServlet extends HttpServlet {
   
-  /* Validates that the user is logged in and gets their email */
+  /* Returns a login or logout link depending on whether the user is logged in */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
-    response.setContentType("application/json;");
+    JsonObject json = new JsonObject();
 
     if (userService.isUserLoggedIn()) {
-      String email = userService.getCurrentUser().getEmail();
-      response.getWriter().println("{\"email\": \"" + email + "\"}");
+      String logoutURL = userService.createLogoutURL("/");
+      json.addProperty("logout", logoutURL);
     } else {
-      response.getWriter().println("{\"error\": \"User not logged in\"}");
+      String loginURL = userService.createLoginURL("/");
+      json.addProperty("login", loginURL);
     }
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
   }
 }
