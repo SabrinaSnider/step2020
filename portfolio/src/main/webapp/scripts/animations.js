@@ -62,7 +62,7 @@ function portfolioButtonHoverOff() {
 }
 
 // Scroll to load content
-const scrollTimeline = new TimelineMax({onUpdate: () => {scrollTimeline.progress();}});
+const scrollTimeline = new TimelineMax({onUpdate: () => scrollTimeline.progress()});
 const scrollController = new ScrollMagic.Controller();
 
 /* About me section */

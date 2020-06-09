@@ -125,11 +125,11 @@ async function submitComment() {
   const message = document.getElementById("comment-input-message").value;
 
   // send ajax request to store comment
-  var http = new XMLHttpRequest();
+  const http = new XMLHttpRequest();
   http.open("POST", "/add-comment", true);
   http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   http.send("message=" + message);
-
+  
   // refresh comments after post request completes
   http.onload = () => getComments();
 }
