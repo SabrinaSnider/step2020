@@ -90,17 +90,17 @@ aboutmeSectionAnimation.setTween(aboutmeAnimation).addTo(scrollController)
 const workAnimation = new TimelineMax();
 
 // animate workplaces in with a slight delay between each
-aboutmeAnimation.from("#google-logo", 1, {x: '-100vh', ease: "Power2.easeOut"})
-aboutmeAnimation.from("#google-info", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
+workAnimation.from("#google-logo", 1, {x: '-100vh', ease: "Power2.easeOut"})
+workAnimation.from("#google-info", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
 
-aboutmeAnimation.from("#uf-info", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
-aboutmeAnimation.from("#uf-logo", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
+workAnimation.from("#uf-info", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
+workAnimation.from("#uf-logo", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
 
-aboutmeAnimation.from("#infotech-logo", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
-aboutmeAnimation.from("#infotech-info", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
+workAnimation.from("#infotech-logo", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
+workAnimation.from("#infotech-info", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
 
-aboutmeAnimation.from("#medtronic-info", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
-aboutmeAnimation.from("#medtronic-logo", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
+workAnimation.from("#medtronic-info", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
+workAnimation.from("#medtronic-logo", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
 
 const workSectionAnimation = new ScrollMagic.Scene({
   triggerElement: "#work-section",
