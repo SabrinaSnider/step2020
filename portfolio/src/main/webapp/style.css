@@ -420,7 +420,7 @@ a:hover {
   /* background-color: #b39ddb; */
 }
 
-.work-info.alignRight, .work-info.alignRight p {
+.work-info.align-right, .work-info.align-right p {
   text-align: right;
 }
 
