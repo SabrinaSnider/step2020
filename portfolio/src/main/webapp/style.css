@@ -280,14 +280,13 @@ a:hover {
 }
 
 #portfolio-arrow {
-  height: 20px;
+  height: 2vw;
   vertical-align: middle;
-  margin-left: 3px;
 }
 
 .big-header-main {
   color: #ede7f6;
-  font-size: 7rem;
+  font-size: 7vw;
   margin: 0px;
   padding: 0px;
   font-weight: bold;
@@ -295,28 +294,20 @@ a:hover {
 
 .sub-header-main {
   color: #9f8cb3;
-  font-size: 7rem;
+  font-size: 7vw;
   margin: 0px;
   padding: 0px;
   font-weight: bold;
 }
 
-.mini-header-main {
-  color: #b9b0c2;
-  font-size: 2rem;
-  margin: 0px;
-  padding: 0px;
-  font-weight: normal;
-}
-
 #portfolio-button-container { 
   width: 100%; 
   text-align: center;
-  padding: 10px;
+  padding: 15px;
 }
 
 #portfolio-button {
-  font-size: 1.5rem;
+  font-size: 2vw;
   border-width: 2px;
 }
 
@@ -403,55 +394,14 @@ a:hover {
 }
 
 /* Work */
-.work-header {
-  /* Display */
-  padding: 20px;
-  width: 30%;
-  margin: 0px;
-  /* Layout */
-  flex-shrink: 0;
-  flex-grow: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* Content */
-  background-color: #673ab7;
-}
-
-.work-item {
-  /* Display */
-  margin: 50px;
-  height: 180px;
-  border-radius: 20px;
-  /* Layout */
+.workplace {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* Content */
-  background-color: #ede7f6;
 }
 
-.work-title {
-  text-align: center;
-  color: #ede7f6;
-  font-size: 1.5rem;
-  margin: 10px;
-}
-
-.work-company {
-  text-align: center;
-  color: #b9b0c2;
-  font-size: 1.3rem;
-  margin: 10px;
-}
-
-.work-description {
-  padding: 10px 20px;
-}
-
-.work-date {
-  margin: 10px 20px;
-  padding: 0px;
+.workplace.reversed {
+  flex-direction: row-reverse;
 }
 
 /* Comments */

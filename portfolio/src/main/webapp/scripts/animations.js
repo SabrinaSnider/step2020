@@ -25,7 +25,7 @@ const subHeader = document.getElementById('sub-header-main')
 
 ityped.init(mainHeader, { 
   strings: ['Hi, my name is Sabrina'], 
-  typeSpeed: 70, 
+  typeSpeed: 55, 
   startDelay: 2000, 
   loop: false, 
   showCursor: false,
@@ -33,7 +33,7 @@ ityped.init(mainHeader, {
 
 ityped.init(subHeader, { 
   strings: ['I like to code'], 
-  typeSpeed: 70, 
+  typeSpeed: 55, 
   startDelay: 4000, 
   loop: false, 
   showCursor: false,
@@ -61,28 +61,22 @@ function portfolioButtonHoverOff() {
   gsap.to("#portfolio-arrow", .2, {rotation: "0", ease: Linear.easeNone});
 }
 
-// Scroll to load content
-const scrollTimeline = new TimelineMax({onUpdate: () => scrollTimeline.progress()});
+// Make scrolling triggers section animations
 const scrollController = new ScrollMagic.Controller();
 
 /* About me section */
-scrollTimeline.from("#about-me-title", 1, {opacity: 0})
-
-const aboutmeTitleAnimation = new ScrollMagic.Scene({ 
-  triggerElement: "#about-me-section", // Load title when scrolling into section
-  triggerHook: .5,
-  duration: "100%",
-})
-
 const aboutmeAnimation = new TimelineMax();
 
+aboutmeAnimation.from('#about-me-title', .6, {opacity: 0})
 aboutmeAnimation.from("#selfie-container", 1, {x: '-20vh', opacity: 0})
 aboutmeAnimation.from("#bio", 1, {x: '20vh', opacity: 0}, "=-.5")
 aboutmeAnimation.from("#selfie", 1, {x: '-20vh', opacity: 0}, "=-1")
 
 const aboutmeSectionAnimation = new ScrollMagic.Scene({
-  triggerElement: "#about-me-title", // Load the entire content animation after title loads
+  triggerElement: "#about-me-section",
+  triggerHook: .8,
 })
 
-aboutmeTitleAnimation.setTween(scrollTimeline).addTo(scrollController)
 aboutmeSectionAnimation.setTween(aboutmeAnimation).addTo(scrollController)
+
+/* Work Section */
