@@ -130,7 +130,10 @@
         <div id="comment-content" class="section-content">
           <form id="comment-form" method="POST" onsubmit="submitComment(); return false;">
             <textarea id="comment-input-message" type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
-            <input id="comment-submit-btn" type="submit" class="purple-button" id="Submit">
+            <div id="comment-form-buttons">
+              <input id="image-upload-button" type="file">
+              <input id="comment-submit-button" type="submit" class="purple-button">
+            </div> 
           </form>
 
           <div id="comment-blocker">
