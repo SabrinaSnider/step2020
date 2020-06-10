@@ -67,7 +67,6 @@ const scrollController = new ScrollMagic.Controller();
 /* About me section */
 const aboutmeAnimation = new TimelineMax();
 
-aboutmeAnimation.from('#about-me-title', .6, {opacity: 0})
 aboutmeAnimation.from("#selfie-container", 1, {x: '-20vh', opacity: 0})
 aboutmeAnimation.from("#bio-text", 1, {x: '20vh', opacity: 0}, "=-1")
 aboutmeAnimation.from("#selfie", 1, {x: '-20vh', opacity: 0}, "=-1")
