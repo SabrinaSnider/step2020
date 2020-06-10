@@ -56,20 +56,20 @@
             <img id="selfie" src="./static-files/images/selfie.jpg">
           </div>
           <div id="bio">
-            <p>
+            <p id="bio-text">
               I'm a software developer and computer science junior at the University of Florida. I love 
               exploring new fields of programming and using my software skills to solve real-world problems.
             </p>
             <div id="skills">
               <div class="row">
-                <span class="programming-language" data-language="Java" data-years="5 years"></span>
-                <span class="programming-language" data-language="Python" data-years="3 years"></span>
-                <span class="programming-language" data-language="C++" data-years="2 years"></span>
+                <span id="java" class="programming-language" data-language="Java" data-years="5 years"></span>
+                <span id="python" class="programming-language" data-language="Python" data-years="3 years"></span>
+                <span id="cpp" class="programming-language" data-language="C++" data-years="2 years"></span>
               </div>
               <div class="row">
-                <span class="programming-language" data-language="HTML" data-years="3 years"></span>
-                <span class="programming-language" data-language="CSS" data-years="3 years"></span>
-                <span class="programming-language" data-language="Javascript" data-years="1 year"></span>
+                <span id="html" class="programming-language" data-language="HTML" data-years="3 years"></span>
+                <span id="css" class="programming-language" data-language="CSS" data-years="3 years"></span>
+                <span id="javascript" class="programming-language" data-language="Javascript" data-years="1 year"></span>
               </div>
             </div>
           </div>
@@ -77,50 +77,58 @@
       </section>
 
       <section id="work-section" class="gray-background">
-        <div class="section-content">
-          <h1 class="section-header work">My Work</h1>
-          <div class="work-item">
-            <div class="work-header">
+        <h1 id="work-title" class="section-header work"><span>My Work</span></h1>
+        <div class="section-content work">
+          <div id="google-work" class="workplace">
+            <img class="work-logo google" src="./static-files/images/work-images/webdev.png">
+            <div id="google-info" class="work-info align-right">
+              <h3 class="work-title">STEP Intern</h3>
+              <h2 class="work-details">Google - Summer 2020</h2>
+              <p class="work-description">
+                Where I am now! I'm working on web dev projects using <b>HTML</b>, <b>CSS</b>, <b>javascript</b>,
+                and a <b>Java</b> backend using <b>Maven</b>. Multiple google APIs are being integrated in the
+                websites.
+              </p>
+            </div>
+          </div>
+
+          <div id="uf-work" class="workplace">
+            <div id="uf-info" class="work-info">
               <h3 class="work-title">Programming 1 TA</h3>
-              <h3 class="work-company">University of Florida</h3>
-            </div>
-
-            <div class="work-content">
-              <p class="work-date">August 2019 - May 2020</p>
+              <h2 class="work-details">University of Florida - Fall 2019, Spring 2020</h2>
               <p class="work-description">
-                Mentored a class of 600 students on fundamental programming concepts using <b>Java</b>. Content spanned object-oriented programming, inheritence, and polymorphism. 
+                Mentored a class of 600 students on fundamental programming concepts using <b>Java</b>. Content 
+                spanned object-oriented programming, inheritence, and polymorphism. 
               </p>
             </div>
+            <img class="work-logo uf" src="./static-files/images/work-images/java.png">
           </div>
 
-          <div class="work-item">
-            <div class="work-header">
+          <div id="infotech-work" class="workplace">
+            <img class="work-logo infotech" src="./static-files/images/work-images/data-analysis.png">
+            <div id="infotech-info" class="work-info align-right">
               <h3 class="work-title">Data Analytics Intern</h3>
-              <h3 class="work-company">InfoTech</h3>
-            </div>
-            
-            <div class="work-content">
-              <p class="work-date">May 2019 - August 2019</p>
+              <h2 class="work-details">InfoTech - Summer 2019</h2>
               <p class="work-description">
-                Developed a data analytics dashboard for company statistics using the <b>Dash</b> framework and <b>Plotly</b>. Used <B>HTML</B> and <b>CSS</b> to develop a responseive front-end, and used <b>python</b> and
-                <b>SQL</b> for the backend.
+                Developed a data analytics dashboard for company statistics using the <b>Dash</b> framework and 
+                <b>Plotly</b>. Used <B>HTML</B> and <b>CSS</b> to develop a responseive front-end, and used 
+                <b>python</b> and <b>SQL</b> for the backend.
               </p>
             </div>
           </div>
 
-          <div class="work-item">
-            <div class="work-header">
+          <div id="medtronic-work" class="workplace last">
+            <div id="medtronic-info" class="work-info">
               <h3 class="work-title">R&D Intern</h3>
-              <h3 class="work-company">Medtronic</h3>
-            </div>
-
-            <div class="work-content">
-              <p class="work-date">May 2018 - August 2018</p>
+              <h2 class="work-details">Medtronic - Summer 2018</h2>
               <p class="work-description">
-                Performed electrical and low-level software tasks to help development of a nerve-monitoring device for surgery, including testing wireless protocols, assembling
-                breadboard circuits, and validating PCB impedances.
+                Performed electrical and low-level software tasks to help development of a nerve-monitoring device 
+                for surgery, including testing wireless protocols, assembling breadboard circuits, and validating 
+                PCB impedances.
               </p>
             </div>
+            <img class="work-logo medtronic" src="./static-files/images/work-images/oscilloscope.svg">
+          </div>
           </div>
         </div>
       </section>

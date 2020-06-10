@@ -2,46 +2,97 @@
 const OFF_WHITE = '#ede7f6';
 const PORTFOLIO_HOVER_BLUE = '#00bcd4';
 
-// Intro section animations
+// Animation constants
+const EASE_IN_RIGHT = {x: '100vw', ease: "Power2.easeOut"};
+const EASE_IN_LEFT = {x: '-100vw', ease: "Power2.easeOut"};
 
-/* Overlay */
-gsap.to('.layer-left', {y: '-100vh', delay: .5});
-gsap.to('.layer-middle', {y: '-100vh', delay: .7});
-gsap.to('.layer-right', {y: '-100vh', delay: .9});
-gsap.to('#overlay', {y: '-100vh', delay: 1.5});
+// Allow scrolling to trigger section animations
+const scrollController = new ScrollMagic.Controller();
 
-/* Rotate circles */
-gsap.to('.circle', 20, {rotation:"360", ease: Linear.easeNone, repeat: -1});
+// Animate each section
+animateLandingPage();
+animateAboutMe();
+animateWork();
 
-/* Fade in portfolio button */
-gsap.fromTo('#portfolio-button', 2,
-    {opacity: 0}, 
-    {x: '0', opacity: 1, ease:'back.out(1.7)', delay: 5.5});
+/**
+ * Animates the landing page of the website
+ */
+function animateLandingPage () {
+  // Overlay
+  gsap.to('.layer-left', {y: '-100vh', delay: .5});
+  gsap.to('.layer-middle', {y: '-100vh', delay: .7});
+  gsap.to('.layer-right', {y: '-100vh', delay: .9});
+  gsap.to('#overlay', {y: '-100vh', delay: 1.5});
 
-// Typewriter effect for title
-const mainHeader = document.getElementById('big-header-main')
-const name = document.getElementById('name')
-const subHeader = document.getElementById('sub-header-main')
+  // Rotate circles
+  gsap.to('.circle', 20, {rotation:"360", ease: Linear.easeNone, repeat: -1});
 
-ityped.init(mainHeader, { 
-  strings: ['Hi, my name is Sabrina'], 
-  typeSpeed: 70, 
-  startDelay: 2000, 
-  loop: false, 
-  showCursor: false,
-});
+  // Fade in portfolio button
+  gsap.fromTo('#portfolio-button', 2,
+      {opacity: 0}, 
+      {x: '0', opacity: 1, ease:'back.out(1.7)', delay: 4.5});
 
-ityped.init(subHeader, { 
-  strings: ['I like to code'], 
-  typeSpeed: 70, 
-  startDelay: 4000, 
-  loop: false, 
-  showCursor: false,
-});
+  // Typewriter effect for title
+  const mainHeader = document.getElementById('big-header-main')
+  const subHeader = document.getElementById('sub-header-main')
+
+  ityped.init(mainHeader, { 
+    strings: ["Hi, I'm Sabrina"], 
+    typeSpeed: 50, 
+    startDelay: 1800, 
+    loop: false, 
+    showCursor: false,
+  });
+
+  ityped.init(subHeader, { 
+    strings: ["I like to code"], 
+    typeSpeed: 50, 
+    startDelay: 3200, 
+    loop: false, 
+    showCursor: false,
+  });
+}
+
+/**
+ * Animates the About Me section of the website
+ */
+function animateAboutMe() {
+  const aboutmeAnimation = new TimelineMax();
+
+  aboutmeAnimation.from("#selfie-container", 1, EASE_IN_LEFT)
+  aboutmeAnimation.from("#bio-text", 1, EASE_IN_RIGHT, "=-1")
+
+  aboutmeAnimation.from("#java", 1, EASE_IN_RIGHT, "=-.9")
+  aboutmeAnimation.from("#python", 1, EASE_IN_RIGHT, "=-.9")
+  aboutmeAnimation.from("#cpp", 1, EASE_IN_RIGHT, "=-.9")
+  aboutmeAnimation.from("#html", 1, EASE_IN_RIGHT, "=-.6")
+  aboutmeAnimation.from("#css", 1, EASE_IN_RIGHT, "=-.9")
+  aboutmeAnimation.from("#javascript", 1, EASE_IN_RIGHT, "=-.9")
+
+  const aboutmeTrigger = new ScrollMagic.Scene({
+    triggerElement: "#about-me-section",
+    triggerHook: .8,
+  })
+
+  aboutmeTrigger.setTween(aboutmeAnimation).addTo(scrollController)
+}
+
+/**
+ * Animates the Work section of the website
+ */
+function animateWork() {
+  animateWorkplaceImage(".google", "#google-work", true);
+  animateWorkplaceImage(".uf", "#uf-work", false);
+  animateWorkplaceImage(".infotech", "#infotech-work", true);
+  animateWorkplaceImage(".medtronic", "#medtronic-work", false);
+}
 
 // Event handlers
 
-/* Change colors and rotate portfolio arrow on hover */
+/**
+ * When hovering onto the "View My Portfolio" button, animate the 
+ * button to blue and rotate the button's arrow.
+ */
 function portfolioButtonHoverOn() {
   gsap.to('#portfolio-button', {
     backgroundColor: PORTFOLIO_HOVER_BLUE, 
@@ -51,7 +102,11 @@ function portfolioButtonHoverOn() {
   gsap.to("#portfolio-arrow", .2, {rotation: "90", ease: Linear.easeNone});
 }
 
-/* Change colors and rotate back portfolio arrow off hover */
+/**
+ * When hovering off of the "View My Portfolio" button, animate
+ * the button to white and transparent and rotate the button's arrow
+ * back.
+ */
 function portfolioButtonHoverOff() {
   gsap.to('#portfolio-button', {
     backgroundColor: 'transparent', 
@@ -61,28 +116,17 @@ function portfolioButtonHoverOff() {
   gsap.to("#portfolio-arrow", .2, {rotation: "0", ease: Linear.easeNone});
 }
 
-// Scroll to load content
-const scrollTimeline = new TimelineMax({onUpdate: () => scrollTimeline.progress()});
-const scrollController = new ScrollMagic.Controller();
+// Helper functions
 
-/* About me section */
-scrollTimeline.from("#about-me-title", 1, {opacity: 0})
-
-const aboutmeTitleAnimation = new ScrollMagic.Scene({ 
-  triggerElement: "#about-me-section", // Load title when scrolling into section
-  triggerHook: .5,
-  duration: "100%",
-})
-
-const aboutmeAnimation = new TimelineMax();
-
-aboutmeAnimation.from("#selfie-container", 1, {x: '-20vh', opacity: 0})
-aboutmeAnimation.from("#bio", 1, {x: '20vh', opacity: 0}, "=-.5")
-aboutmeAnimation.from("#selfie", 1, {x: '-20vh', opacity: 0}, "=-1")
-
-const aboutmeSectionAnimation = new ScrollMagic.Scene({
-  triggerElement: "#about-me-title", // Load the entire content animation after title loads
-})
-
-aboutmeTitleAnimation.setTween(scrollTimeline).addTo(scrollController)
-aboutmeSectionAnimation.setTween(aboutmeAnimation).addTo(scrollController)
+/**
+ * Function that applies the same animation effect to workplace images as
+ * you scroll down.
+ * @param {string} imageElementSelector css selector for the image to be animated
+ * @param {string} triggerElementSelector css selector for the element that starts the animation
+ * @param {boolean} fromLeft whether the image should slide in from the left
+ */
+function animateWorkplaceImage(imageElementSelector, triggerElementSelector, fromLeft) {
+  const animation = gsap.from(imageElementSelector, .75, fromLeft ? EASE_IN_LEFT : EASE_IN_RIGHT)
+  const trigger = new ScrollMagic.Scene({triggerElement: triggerElementSelector, triggerHook: .7})
+  trigger.setTween(animation).addTo(scrollController)
+}
