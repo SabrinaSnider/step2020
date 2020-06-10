@@ -1,9 +1,17 @@
 package com.google.sps.servlets;
 
+import com.google.appengine.api.blobstore.BlobInfo;
+import com.google.appengine.api.blobstore.BlobInfoFactory;
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +34,7 @@ public class AddCommentServlet extends HttpServlet {
     String email = userService.getCurrentUser().getEmail();
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
+    String imageUrl = getUploadedFileUrl(request, "image");
 
     Entity newComment = new Entity("Comment");
 
@@ -34,5 +43,37 @@ public class AddCommentServlet extends HttpServlet {
     newComment.setProperty("message", message);
 
     DatastoreServiceFactory.getDatastoreService().put(newComment);
+  }
+
+  /** Returns the URL to the uploaded file or null if the user didn't upload a file. */
+  private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
+    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+    List<BlobKey> commentImages = blobstoreService.getUploads(request).get("image");
+
+    // User submitted form without selecting a file (on dev server)
+    if (commentImages == null || commentImages.isEmpty()) return null;
+
+    // Since users can only upload one image per comment, get the first image
+    BlobKey imageKey = commentImages.get(0);
+
+    // User submitted form without selecting a file (on live server)
+    BlobInfo imageInfo = new BlobInfoFactory().loadBlobInfo(imageKey);
+    if (imageInfo.getSize() == 0) {
+      blobstoreService.delete(imageKey);
+      return null;
+    }
+
+    // Use ImagesService to get a URL that points to the uploaded file.
+    ImagesService imagesService = ImagesServiceFactory.getImagesService();
+    ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
+
+    // To support AppEngine's devserver, use the relative image path instead of
+    //  the path returned by imagesService (which contains a host)
+    try {
+      URL url = new URL(imagesService.getServingUrl(options));
+      return url.getPath();
+    } catch (MalformedURLException e) {
+      return imagesService.getServingUrl(options);
+    }
   }
 }
