@@ -254,13 +254,12 @@ a:hover {
 }
 
 #intro-content {
-  width: 95%;
   z-index: 100;
 }
 
 #intro-text {
   padding: 0px 15px;
-  width: 85%;
+  width: 60vw;
   text-align: left;
   font-family: 'Inconsolata', monospace;
   margin: auto;
@@ -288,7 +287,7 @@ a:hover {
 
 .big-header-main {
   color: #ede7f6;
-  font-size: 6vw;
+  font-size: 7vw;
   margin: 0px;
   padding: 0px;
   font-weight: bold;
@@ -296,7 +295,7 @@ a:hover {
 
 .sub-header-main {
   color: #9f8cb3;
-  font-size: 6vw;
+  font-size: 7vw;
   margin: 0px;
   padding: 0px;
   font-weight: bold;

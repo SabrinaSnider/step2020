@@ -16,7 +16,7 @@ gsap.to('.circle', 20, {rotation:"360", ease: Linear.easeNone, repeat: -1});
 /* Fade in portfolio button */
 gsap.fromTo('#portfolio-button', 2,
     {opacity: 0}, 
-    {x: '0', opacity: 1, ease:'back.out(1.7)', delay: 5});
+    {x: '0', opacity: 1, ease:'back.out(1.7)', delay: 4.5});
 
 // Typewriter effect for title
 const mainHeader = document.getElementById('big-header-main')
@@ -24,7 +24,7 @@ const name = document.getElementById('name')
 const subHeader = document.getElementById('sub-header-main')
 
 ityped.init(mainHeader, { 
-  strings: ['Hi, my name is Sabrina'], 
+  strings: ["Hi, I'm Sabrina"], 
   typeSpeed: 50, 
   startDelay: 1800, 
   loop: false, 
@@ -32,9 +32,9 @@ ityped.init(mainHeader, {
 });
 
 ityped.init(subHeader, { 
-  strings: ['I like to code'], 
+  strings: ["I like to code"], 
   typeSpeed: 50, 
-  startDelay: 3400, 
+  startDelay: 3200, 
   loop: false, 
   showCursor: false,
 });
@@ -61,7 +61,7 @@ function portfolioButtonHoverOff() {
   gsap.to("#portfolio-arrow", .2, {rotation: "0", ease: Linear.easeNone});
 }
 
-// Make scrolling triggers section animations
+// Make scrolling trigger section animations
 const scrollController = new ScrollMagic.Controller();
 
 /* About me section */
