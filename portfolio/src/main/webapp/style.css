@@ -280,7 +280,7 @@ a:hover {
 }
 
 #portfolio-arrow {
-  height: 2vw;
+  height: 1.8vw;
   vertical-align: middle;
 }
 
@@ -307,7 +307,7 @@ a:hover {
 }
 
 #portfolio-button {
-  font-size: 2vw;
+  font-size: 1.8vw;
   border-width: 2px;
 }
 
@@ -355,6 +355,7 @@ a:hover {
 
 #bio p {
   text-align: right;
+  margin-bottom: 20px;
 }
 
 .row {
@@ -400,8 +401,14 @@ a:hover {
   justify-content: space-between;
 }
 
-.workplace.reversed {
-  flex-direction: row-reverse;
+.work-info {
+  width: 45%;
+  background-color: #673ab7;
+}
+
+.work-logo {
+  width: 45%;
+  background-color: #b39ddb;
 }
 
 /* Comments */
