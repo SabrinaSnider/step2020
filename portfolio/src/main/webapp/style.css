@@ -395,6 +395,10 @@ a:hover {
 }
 
 /* Work */
+#work-section {
+  overflow: hidden;
+}
+
 .workplace {
   display: flex;
   flex-direction: row;
@@ -402,13 +406,36 @@ a:hover {
 }
 
 .work-info {
-  width: 45%;
-  background-color: #673ab7;
+  width: 50%;
+  margin: 20px;
+  /* background-color: #673ab7; */
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .work-logo {
-  width: 45%;
-  background-color: #b39ddb;
+  width: 50%;
+  margin: 20px;
+  /* background-color: #b39ddb; */
+}
+
+.work-info.alignRight, .work-info.alignRight p {
+  text-align: right;
+}
+
+.work-title {
+  font-size: 2.5rem;
+  margin: 10px 0px;
+}
+
+.work-details {
+  font-size: 1.3rem;
+  color: rgb(50, 44, 63);
+}
+
+.work-description {
+  padding: 0px;
 }
 
 /* Comments */
