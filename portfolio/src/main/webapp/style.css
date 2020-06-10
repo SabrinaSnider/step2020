@@ -85,7 +85,7 @@ a:hover {
 .section-header {
   /* Display */
   padding: 10px;
-  margin: 50px auto 20px;
+  margin: 20px auto;
   width: fit-content;
   /* Layout */
   position: relative;
@@ -125,7 +125,8 @@ a:hover {
 }
 
 .gray-background {
-  background-color: #eeeeee;
+  background-color: #fafafa;
+  box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.25);
 }
 
 .white-button {
@@ -233,23 +234,23 @@ a:hover {
 }
 
 .circle-small {
-  top: -7rem;
-  left: -7rem;
+  top: -8vw;
+  left: -8vw;
 }
 
 #circle-image-small {
-  height: 22rem;
-  width: 22rem;
+  height: 27vw;
+  width: 27vw;
 }
 
 .circle-large {
-  bottom: -16rem;
-  right: -16rem;
+  bottom: -20vw;
+  right: -20vw;
 }
 
 #circle-image-large {
-  height: 42rem;
-  width: 42rem;
+  height: 46vw;
+  width: 46vw;
 }
 
 #intro-content {
@@ -259,9 +260,10 @@ a:hover {
 
 #intro-text {
   padding: 0px 15px;
-  width: 100%;
+  width: 85%;
   text-align: left;
   font-family: 'Inconsolata', monospace;
+  margin: auto;
 }
 
 #overlay {
@@ -286,7 +288,7 @@ a:hover {
 
 .big-header-main {
   color: #ede7f6;
-  font-size: 7vw;
+  font-size: 6vw;
   margin: 0px;
   padding: 0px;
   font-weight: bold;
@@ -294,7 +296,7 @@ a:hover {
 
 .sub-header-main {
   color: #9f8cb3;
-  font-size: 7vw;
+  font-size: 6vw;
   margin: 0px;
   padding: 0px;
   font-weight: bold;
@@ -303,11 +305,11 @@ a:hover {
 #portfolio-button-container { 
   width: 100%; 
   text-align: center;
-  padding: 15px;
+  padding: 10px;
 }
 
 #portfolio-button {
-  font-size: 1.8vw;
+  font-size: 1.7vw;
   border-width: 2px;
 }
 
@@ -399,25 +401,30 @@ a:hover {
   overflow: hidden;
 }
 
+.section-content.work {
+  max-width: 900px;
+}
+
 .workplace {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
+.workplace:not(.last) {
+  margin-bottom: 100px;
+}
+
 .work-info {
   width: 50%;
   margin: 20px;
-  /* background-color: #673ab7; */
   display: flex;
   flex-direction: column;
   text-align: left;
 }
 
 .work-logo {
-  width: 50%;
-  margin: 20px;
-  /* background-color: #b39ddb; */
+  height: 20rem;
 }
 
 .work-info.align-right, .work-info.align-right p {
@@ -436,6 +443,7 @@ a:hover {
 
 .work-description {
   padding: 0px;
+  font-size: 1.1rem;
 }
 
 /* Comments */

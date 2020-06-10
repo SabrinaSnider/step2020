@@ -79,32 +79,27 @@ aboutmeAnimation.from(".html", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-.6")
 aboutmeAnimation.from(".css", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-.9")
 aboutmeAnimation.from(".javascript", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-.9")
 
-const aboutmeSectionAnimation = new ScrollMagic.Scene({
+const aboutmeTrigger = new ScrollMagic.Scene({
   triggerElement: "#about-me-section",
   triggerHook: .8,
 })
 
-aboutmeSectionAnimation.setTween(aboutmeAnimation).addTo(scrollController)
+aboutmeTrigger.setTween(aboutmeAnimation).addTo(scrollController)
 
 /* Work Section */
-const workAnimation = new TimelineMax();
+// animate workplaces as you scroll to them
+const googleAnimation = gsap.from(".work-logo.google", .75, {x: '-100vw', ease: "Power2.easeOut"})
+const googleTrigger = new ScrollMagic.Scene({triggerElement: "#google-work", triggerHook: .7})
+googleTrigger.setTween(googleAnimation).addTo(scrollController)
 
-// animate workplaces in with a slight delay between each
-workAnimation.from("#google-logo", 1, {x: '-100vh', ease: "Power2.easeOut"})
-workAnimation.from("#google-info", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
+const ufAnimation = gsap.from(".work-logo.uf", .75, {x: '100vw', ease: "Power2.easeOut"})
+const ufTrigger = new ScrollMagic.Scene({triggerElement: "#uf-work", triggerHook: .7})
+ufTrigger.setTween(ufAnimation).addTo(scrollController)
 
-workAnimation.from("#uf-info", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
-workAnimation.from("#uf-logo", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
+const infotechAnimation = gsap.from(".work-logo.infotech", .75, {x: '-100vw', ease: "Power2.easeOut"})
+const infotechTrigger = new ScrollMagic.Scene({triggerElement: "#infotech-work", triggerHook: .7})
+infotechTrigger.setTween(infotechAnimation).addTo(scrollController)
 
-workAnimation.from("#infotech-logo", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
-workAnimation.from("#infotech-info", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
-
-workAnimation.from("#medtronic-info", 1, {x: '-100vh', ease: "Power2.easeOut"}, "=-.8")
-workAnimation.from("#medtronic-logo", 1, {x: '100vh', ease: "Power2.easeOut"}, "=-1")
-
-const workSectionAnimation = new ScrollMagic.Scene({
-  triggerElement: "#work-section",
-  triggerHook: .8,
-})
-
-workSectionAnimation.setTween(workAnimation).addTo(scrollController)
+const medtronicAnimation = gsap.from(".work-logo.medtronic", .75, {x: '100vw', ease: "Power2.easeOut"})
+const medtronicTrigger = new ScrollMagic.Scene({triggerElement: "#medtronic-work", triggerHook: .7})
+medtronicTrigger.setTween(medtronicAnimation).addTo(scrollController)
