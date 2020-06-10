@@ -7,12 +7,14 @@ public class Comment {
   private long timestamp;
   private String message;
   private String email;
+  private String image;
 
   public Comment(Entity commentEntity) {
     this.id = commentEntity.getKey().getId();
     this.email = (String) commentEntity.getProperty("email");
     this.timestamp = (long) commentEntity.getProperty("timestamp");
     this.message = (String) commentEntity.getProperty("message");
+    this.image = commentEntity.getProperty("image") != null ? (String) commentEntity.getProperty("image") : null; 
   }
 
   public long getId() { return id; }
