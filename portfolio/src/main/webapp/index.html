@@ -128,7 +128,7 @@
       <section id="comment-section" class="white-background">
         <h1 class="section-header">Comments</h1>
         <div id="comment-content" class="section-content">
-          <form id="comment-form" method="POST" onsubmit="submitComment(); return false;">
+          <form id="comment-form" method="POST" data-url="" onsubmit="submitComment(); return false;" enctype="multipart/form-data">
             <textarea id="comment-input-message" type="text" name="message" rows="4" placeholder="Drop a message!"></textarea>
             <input id="image-upload-button" type="file">
             <input id="comment-submit-button" type="submit" class="purple-button">
@@ -141,16 +141,16 @@
           <div id="comment-options">
             <div>
               <label for="comment-sort">Sort by</label>
-              <select id="comment-sort-select" name="comment-sort" selected="timestamp" onchange="getComments();">
+              <select id="comment-sort-select" name="comment-sort" selected="timestamp" onchange="displayComments();">
                 <option value="timestamp">Time</option>
                 <option value="email">Email</option>
               </select>
-              <img id="sort-icon" class="sort-down" onclick="toggleSort();">
+              <img id="sort-icon" class="sort-down" onclick="displayComments();">
             </div>
 
             <div>
               <label for="comment-max">Max</label>
-              <select id="comment-max-select" name="comment-max" selected=5  onchange="getComments();">
+              <select id="comment-max-select" name="comment-max" selected=5  onchange="displayComments();">
                 <option value=5>5</option>
                 <option value=10>10</option>
                 <option value=25>25</option>

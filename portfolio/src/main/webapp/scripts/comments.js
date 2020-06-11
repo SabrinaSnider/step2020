@@ -15,6 +15,7 @@
 /* Function called on page load to show comments and check if the user can comment */
 async function init() {
   setLoginLogoutURL();
+  fetchBlobstoreUrl();
   displayComments();
 }
 
@@ -31,6 +32,15 @@ function createElementWithParams (tag, {
   el.onclick = onclick;
 
   return el;
+}
+
+/* */
+function fetchBlobstoreUrl() {
+  fetch('/blobstore-upload')
+  .then(response => response.text())
+  .then(imageUploadUrl => {
+    document.querySelector('#comment-form').dataset.url = imageUploadUrl;
+  });
 }
 
 /* Toggles the sort between ascending and descending, then updates comments */
@@ -103,13 +113,14 @@ async function displayComments() {
 
 /* Adds a comment to datastore and prompt a reload of comments */
 async function submitComment() {
-  // get message text
+  const url = document.querySelector('#comment-form').dataset.url;
   const message = document.getElementById("comment-input-message").value;
 
+  console.log("before post")
   // send ajax request to store comment
   const http = new XMLHttpRequest();
-  http.open("POST", "/add-comment", true);
-  http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  http.open("POST", url, true);
+  http.setRequestHeader("Content-type","multipart/form-data");
   http.send("message=" + message);
   
   // refresh comments after post request completes
@@ -118,7 +129,6 @@ async function submitComment() {
 
 /* Creates an <li> element with comment information */
 function addComment(comment, isAdmin, currentUserEmail) {
-  console.log("comment stuff", isAdmin, currentUserEmail)
   const commentItem = createElementWithParams("li", {className: "comment"})
   const commentHeader = createElementWithParams("div", {className: "comment-header"})
 
@@ -141,8 +151,14 @@ function addComment(comment, isAdmin, currentUserEmail) {
   commentHeader.appendChild(commentEmail);
   commentItem.appendChild(commentMessage);
 
+  if (comment.image) console.log("image", comment.image);
+  const commentImage = document.createElement("img");
+  if (comment.image) {
+    commentImage.src = comment.image;
+    commentItem.appendChild(commentImage);
+  }
+
   // only let the user delete the comment if its their comment or if theyre and admin
-  console.log(currentUserEmail === comment.email)
   if (isAdmin || currentUserEmail === comment.email) commentHeader.appendChild(commentDelete);
 
   return commentItem;

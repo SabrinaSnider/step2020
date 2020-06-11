@@ -32,6 +32,7 @@ public class AddCommentServlet extends HttpServlet {
   /* Adds the request comment to the datastore */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    System.out.println("add comment servelt");
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) return;
 
