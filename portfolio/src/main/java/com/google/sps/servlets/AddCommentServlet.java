@@ -32,7 +32,6 @@ public class AddCommentServlet extends HttpServlet {
   /* Adds the request comment to the datastore */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    System.out.println("add comment servelt");
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) return;
 
@@ -51,7 +50,11 @@ public class AddCommentServlet extends HttpServlet {
     DatastoreServiceFactory.getDatastoreService().put(newComment);
   }
 
-  /** Returns the URL to the uploaded file or null if the user didn't upload a file. */
+  /* 
+   * Returns an Optional <String> with the URL to the uploaded file, if it exists.
+   * @param request The POST request for adding a comment to blobstore
+   * @return Returns an Optional object with the url String to the image
+  */
   private Optional<String> getUploadedFileUrl(HttpServletRequest request) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     List<BlobKey> allCommentImageKeys = blobstoreService.getUploads(request).get("image");

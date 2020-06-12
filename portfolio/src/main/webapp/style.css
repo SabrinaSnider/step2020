@@ -502,7 +502,7 @@ a:hover {
 }
 
 #comment-form {
-  /* display: none; */
+  display: none;
   flex-direction: column;
   text-align: left;
   flex-grow: 1;

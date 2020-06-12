@@ -34,7 +34,7 @@ function createElementWithParams (tag, {
   return el;
 }
 
-/* */
+/* Gets the image upload URL for blobstore and stores in in the data-url attribute */
 function fetchBlobstoreUrl() {
   fetch('/blobstore-upload')
   .then(response => response.text())
@@ -114,17 +114,10 @@ async function displayComments() {
 /* Adds a comment to datastore and prompt a reload of comments */
 async function submitComment() {
   const url = document.querySelector('#comment-form').dataset.url;
-  const message = document.getElementById("comment-input-message").value;
-
-  console.log("before post")
-  // send ajax request to store comment
-  const http = new XMLHttpRequest();
-  http.open("POST", url, true);
-  http.setRequestHeader("Content-type","multipart/form-data");
-  http.send("message=" + message);
-  
-  // refresh comments after post request completes
-  http.onload = () => displayComments();
+  fetch(url, {
+    method : "POST",
+    body: new FormData(document.getElementById("comment-form")),
+  }).then(() => displayComments()).then(() => fetchBlobstoreUrl());
 }
 
 /* Creates an <li> element with comment information */
@@ -151,10 +144,10 @@ function addComment(comment, isAdmin, currentUserEmail) {
   commentHeader.appendChild(commentEmail);
   commentItem.appendChild(commentMessage);
 
-  if (comment.image) console.log("image", comment.image);
+  if (comment.image) console.log("image", comment.image.value);
   const commentImage = document.createElement("img");
-  if (comment.image) {
-    commentImage.src = comment.image;
+  if (comment.image.value) {
+    commentImage.src = comment.image.value;
     commentItem.appendChild(commentImage);
   }
 
