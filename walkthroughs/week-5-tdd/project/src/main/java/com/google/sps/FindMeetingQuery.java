@@ -22,38 +22,39 @@ import java.util.Collections;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    // if no attendees, return all day
-    if (request.getAttendees().isEmpty()) return Arrays.asList(TimeRange.WHOLE_DAY);
-
     Collection<TimeRange> availableTimes = new ArrayList<TimeRange>();
 
-    // if request is longer than a day, return no events
+    // If the request is longer than a day, return no events.
     if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) return availableTimes;
 
-    // make a sorted list of the events
+    // Make a sorted list of the events.
     List<Event> eventList = new ArrayList(events);
     Collections.sort(eventList, (Event e1, Event e2) -> TimeRange.ORDER_BY_START.compare(e1.getWhen(), e2.getWhen()));
-
+    
     int theoreticalStart = TimeRange.START_OF_DAY;
+
     for (Event event: events) {
-      // if theoretical start happens before the event starts
+      // Ignore the event if no required members are in it.
+      if (Collections.disjoint(event.getAttendees(), request.getAttendees())) continue;
+
       if (theoreticalStart < event.getWhen().start()) {
-        if (theoreticalStart + request.getDuration() < event.getWhen().end()) {
-          // if theoretical end happens before the event starts, add it
-          availableTimes.add(TimeRange.fromStartEnd(theoreticalStart, event.getWhen().end(), false));
+        // If the meeting can happen before the event starts, add it.
+        if (theoreticalStart + request.getDuration() <= event.getWhen().start()) {
+          availableTimes.add(TimeRange.fromStartEnd(theoreticalStart, event.getWhen().start(), false));
         }
 
-        // move theoretical start pointer
+        // Move theoretical start pointer to after the event.
         theoreticalStart = event.getWhen().end();
         continue;
-      } else if (theoreticalStart > event.getWhen().start() && theoreticalStart < event.getWhen().end()) {
-        // if nextAvailableStart is in the middle of the event, move nextAvailableStart to after the event
+
+        // If the theoretical start is in the middle of the event, move theoretical start to after the event.
+      } else if (theoreticalStart < event.getWhen().end()) {
         theoreticalStart = event.getWhen().end();
         continue;
       }
     }
 
-    // if there is time after all of the events, return that time
+    // If there is time for the meeting after all of the events, add that time.
     if (theoreticalStart + request.getDuration() <= TimeRange.END_OF_DAY) {
       availableTimes.add(TimeRange.fromStartEnd(theoreticalStart, TimeRange.END_OF_DAY, true));
     }
