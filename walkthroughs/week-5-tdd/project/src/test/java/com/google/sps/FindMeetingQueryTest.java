@@ -274,9 +274,9 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void optionalAttendeesNotRequired() {
-    // Have one optional person, but make it so that there is not enough room at any point in 
-    // their day to include them in the meeting.
+  public void optionalAttendeeBusyAllDay() {
+    // Have one optional person, but make it so that they cannot make the meeing at any point in
+    // their day, so they're ignored.
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
@@ -301,8 +301,8 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void optionalAttendeesConsidered() {
-    // Have one optional person with available times, and see if only times with them included
-    // are returned.
+    // Have one optional person with available meeting times, and see if only times with them 
+    // included are returned.
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
@@ -327,8 +327,8 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void optionalAttendeeNotEnoughRoom() {
-    // Have one optional person, but make it so that there is not enough room in their
-    // schedule to include them in the meeting
+    // Have one optional person, but make it so that there is not enough room in their schedule to 
+    // include them in the meeting.
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
@@ -349,8 +349,8 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void optionalAttendeesWithGaps() {
-    // Only have two optional people with some gaps for meeting times
+  public void onlyOptionalAttendeesWithGaps() {
+    // Only have two optional people with some gaps for meeting times.
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
@@ -374,8 +374,8 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void optionalAttendeesNoGaps() {
-    // Only have two optional people with no gaps for meeting times
+  public void onlyOptionalAttendeesNoGaps() {
+    // Only have two optional people with no gaps for meeting times.
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
