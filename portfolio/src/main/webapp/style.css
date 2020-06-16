@@ -504,11 +504,11 @@ a:hover {
   font-weight: bold;
 }
 
-#comment-submit-btn {
+#comment-submit-button {
   margin: 10px 0px;
 }
 
-#comment-submit-btn:hover { 
+#comment-submit-button:hover { 
   cursor: pointer; 
 }
 
