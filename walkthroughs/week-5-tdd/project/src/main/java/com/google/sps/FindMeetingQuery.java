@@ -22,20 +22,40 @@ import java.util.Collections;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<TimeRange> availableTimes = new ArrayList<TimeRange>();
-
-    // If the request is longer than a day, return no events.
-    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) return availableTimes;
-
     // Make a sorted list of the events.
     List<Event> eventList = new ArrayList(events);
     Collections.sort(eventList, (Event e1, Event e2) -> TimeRange.ORDER_BY_START.compare(e1.getWhen(), e2.getWhen()));
     
+    Collection<TimeRange> optionalTimes = getMeetingList(eventList, request, true);
+    Collection<TimeRange> requiredTimes = getMeetingList(eventList, request, false);
+
+    if (optionalTimes.size() > 0) {
+      return optionalTimes;
+    } else if (request.getAttendees().size() > 0) {
+      return requiredTimes;
+    } else {
+      return Arrays.asList();
+    }
+  }
+
+  private Collection<TimeRange> getMeetingList(List<Event> events, MeetingRequest request, boolean includeOptional) {
+    Collection<TimeRange> availableTimes = new ArrayList<TimeRange>();
+
+    // If the request is longer than a day, return no events.
+    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) return availableTimes;
+    
     int theoreticalStart = TimeRange.START_OF_DAY;
 
     for (Event event: events) {
-      // Ignore the event if no required members are in it.
-      if (Collections.disjoint(event.getAttendees(), request.getAttendees())) continue;
+      // Ignore the event if no members are in it.
+      boolean noRequiredMembers = Collections.disjoint(event.getAttendees(), request.getAttendees());
+      boolean noOptionalMembers = Collections.disjoint(event.getAttendees(), request.getOptionalAttendees());
+
+      if (includeOptional) {
+        if (noRequiredMembers && noOptionalMembers) continue;
+      } else {
+        if (noRequiredMembers) continue;
+      }
 
       if (theoreticalStart < event.getWhen().start()) {
         // If the meeting can happen before the event starts, add it.
