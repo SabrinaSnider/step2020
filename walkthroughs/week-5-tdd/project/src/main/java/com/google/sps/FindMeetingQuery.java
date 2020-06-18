@@ -26,6 +26,7 @@ public final class FindMeetingQuery {
     List<Event> eventList = new ArrayList(events);
     Collections.sort(eventList, (Event e1, Event e2) -> TimeRange.ORDER_BY_START.compare(e1.getWhen(), e2.getWhen()));
     
+    // Get the possible meeting times with and without the optional attendees.
     Collection<TimeRange> optionalTimes = getMeetingList(eventList, request, true);
     Collection<TimeRange> requiredTimes = getMeetingList(eventList, request, false);
 
@@ -38,6 +39,11 @@ public final class FindMeetingQuery {
     }
   }
 
+  /*
+  * @param events The list of existing, sorted events
+  * @param includeOptional Whether or not meeting times should include optional attendees
+  * @return A Collection of possible TimeRanges for the meeting
+  */
   private Collection<TimeRange> getMeetingList(List<Event> events, MeetingRequest request, boolean includeOptional) {
     Collection<TimeRange> availableTimes = new ArrayList<TimeRange>();
 
@@ -53,8 +59,8 @@ public final class FindMeetingQuery {
 
       if (includeOptional) {
         if (noRequiredMembers && noOptionalMembers) continue;
-      } else {
-        if (noRequiredMembers) continue;
+      } else if (noRequiredMembers) {
+        continue;
       }
 
       if (theoreticalStart < event.getWhen().start()) {
@@ -65,12 +71,10 @@ public final class FindMeetingQuery {
 
         // Move theoretical start pointer to after the event.
         theoreticalStart = event.getWhen().end();
-        continue;
 
         // If the theoretical start is in the middle of the event, move theoretical start to after the event.
       } else if (theoreticalStart < event.getWhen().end()) {
         theoreticalStart = event.getWhen().end();
-        continue;
       }
     }
 
