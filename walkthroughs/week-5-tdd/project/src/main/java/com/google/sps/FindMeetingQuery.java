@@ -28,12 +28,11 @@ public final class FindMeetingQuery {
     
     // Get the possible meeting times with and without the optional attendees.
     Collection<TimeRange> optionalTimes = getMeetingList(eventList, request, true);
-    Collection<TimeRange> requiredTimes = getMeetingList(eventList, request, false);
 
     if (optionalTimes.size() > 0) {
       return optionalTimes;
     } else if (request.getAttendees().size() > 0) {
-      return requiredTimes;
+      return getMeetingList(eventList, request, false);
     } else {
       return Arrays.asList();
     }
