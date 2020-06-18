@@ -26,7 +26,7 @@ public final class FindMeetingQuery {
     List<Event> eventList = new ArrayList(events);
     Collections.sort(eventList, (Event e1, Event e2) -> TimeRange.ORDER_BY_START.compare(e1.getWhen(), e2.getWhen()));
     
-    // Get the possible meeting times with and without the optional attendees.
+    // Get the possible meeting times with the optional attendees.
     Collection<TimeRange> optionalTimes = getMeetingList(eventList, request, true);
 
     if (optionalTimes.size() > 0) {
@@ -38,11 +38,12 @@ public final class FindMeetingQuery {
     }
   }
 
-  /*
-  * @param events The list of existing, sorted events
-  * @param includeOptional Whether or not meeting times should include optional attendees
-  * @return A Collection of possible TimeRanges for the meeting
-  */
+  /**
+   * @param events The list of existing, sorted events
+   * @param request The meeting request, containing attendees and duration
+   * @param includeOptional Whether or not meeting times should include optional attendees
+   * @return A Collection of possible TimeRanges for the meeting
+   */
   private Collection<TimeRange> getMeetingList(List<Event> events, MeetingRequest request, boolean includeOptional) {
     Collection<TimeRange> availableTimes = new ArrayList<TimeRange>();
 
@@ -56,11 +57,7 @@ public final class FindMeetingQuery {
       boolean noRequiredMembers = Collections.disjoint(event.getAttendees(), request.getAttendees());
       boolean noOptionalMembers = Collections.disjoint(event.getAttendees(), request.getOptionalAttendees());
 
-      if (includeOptional) {
-        if (noRequiredMembers && noOptionalMembers) continue;
-      } else if (noRequiredMembers) {
-        continue;
-      }
+      if (noRequiredMembers && (noOptionalMembers || !includeOptional)) continue;
 
       if (theoreticalStart < event.getWhen().start()) {
         // If the meeting can happen before the event starts, add it.
